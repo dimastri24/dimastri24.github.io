@@ -1,0 +1,29 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	interface Props {
+		showSidebar?: boolean;
+		children: Snippet;
+	}
+
+	let { showSidebar = false, children }: Props = $props();
+</script>
+
+<div
+	class="relative min-h-screen overflow-x-clip"
+	class:lg={showSidebar}
+	data-shell-sidebar={showSidebar ? 'enabled' : 'disabled'}
+>
+	<div class="pointer-events-none absolute inset-0">
+		<div
+			class="absolute top-[-8rem] left-[-12rem] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,_rgba(198,162,106,0.18)_0%,_rgba(198,162,106,0)_70%)] blur-3xl"
+		></div>
+		<div
+			class="absolute right-[-8rem] bottom-[-10rem] h-[22rem] w-[22rem] rounded-full bg-[radial-gradient(circle,_rgba(255,251,221,0.08)_0%,_rgba(255,251,221,0)_72%)] blur-3xl"
+		></div>
+	</div>
+
+	<div class="relative z-10 min-h-screen lg:pl-[5.5rem]">
+		{@render children()}
+	</div>
+</div>

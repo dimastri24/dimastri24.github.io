@@ -1,2 +1,173 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+:root {
+	--font-sans: 'Aptos', 'Segoe UI', 'SF Pro Text', 'Helvetica Neue', 'Arial Nova', sans-serif;
+	--font-display: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'Georgia', serif;
+	--font-code: 'Cascadia Code', 'Fira Code', 'SFMono-Regular', 'Consolas', monospace;
+
+	--color-forest-950: #15291e;
+	--color-forest-900: #1b3326;
+	--color-forest-800: #254131;
+	--color-cream-50: #fffbdd;
+	--color-cream-100: #f7f1d2;
+	--color-gold-500: #b08d57;
+	--color-gold-400: #c6a26a;
+	--color-ink-900: #101612;
+	--color-ink-700: #2d372f;
+	--color-line-dark: rgba(255, 251, 221, 0.14);
+	--color-line-light: rgba(21, 41, 30, 0.14);
+	--color-shadow-dark: rgba(6, 10, 8, 0.28);
+	--color-shadow-soft: rgba(21, 41, 30, 0.12);
+
+	--bg-page: var(--color-forest-950);
+	--bg-page-glow: rgba(198, 162, 106, 0.12);
+	--bg-panel-dark: rgba(255, 255, 255, 0.04);
+	--bg-panel-light: rgba(21, 41, 30, 0.04);
+	--bg-section-dark: var(--color-forest-950);
+	--bg-section-light: var(--color-cream-50);
+	--text-on-dark: var(--color-cream-50);
+	--text-on-light: var(--color-ink-900);
+	--text-muted-dark: rgba(255, 251, 221, 0.72);
+	--text-muted-light: rgba(16, 22, 18, 0.72);
+	--accent: var(--color-gold-500);
+	--accent-strong: var(--color-gold-400);
+	--focus-ring: rgba(176, 141, 87, 0.45);
+
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+	--space-24: 6rem;
+
+	--radius-sm: 0.5rem;
+	--radius-md: 0.875rem;
+	--radius-lg: 1.25rem;
+	--radius-xl: 1.75rem;
+	--radius-pill: 999px;
+
+	--border-soft-dark: 1px solid var(--color-line-dark);
+	--border-soft-light: 1px solid var(--color-line-light);
+	--shadow-card: 0 16px 40px var(--color-shadow-soft);
+	--shadow-hero: 0 30px 60px var(--color-shadow-dark);
+	--shadow-float: 0 24px 50px rgba(6, 10, 8, 0.22);
+
+	--ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+	--ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
+	--duration-fast: 160ms;
+	--duration-base: 260ms;
+	--duration-slow: 420ms;
+}
+
+html {
+	scroll-behavior: smooth;
+	background: var(--bg-page);
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	background:
+		radial-gradient(circle at top, var(--bg-page-glow), transparent 24rem),
+		linear-gradient(180deg, var(--color-forest-900) 0%, var(--bg-page) 100%);
+	color: var(--text-on-dark);
+	font-family: var(--font-sans);
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+::selection {
+	background: rgba(198, 162, 106, 0.28);
+	color: var(--color-cream-50);
+}
+
+a {
+	color: inherit;
+	text-decoration-thickness: 0.08em;
+	text-underline-offset: 0.18em;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+}
+
+:focus-visible {
+	outline: 3px solid var(--focus-ring);
+	outline-offset: 4px;
+}
+
+#svelte {
+	min-height: 100vh;
+}
+
+.text-display {
+	font-family: var(--font-display);
+	letter-spacing: -0.03em;
+}
+
+.text-code {
+	font-family: var(--font-code);
+}
+
+.text-muted-dark {
+	color: var(--text-muted-dark);
+}
+
+.text-muted-light {
+	color: var(--text-muted-light);
+}
+
+.surface-card-dark {
+	background: var(--bg-panel-dark);
+	border: var(--border-soft-dark);
+	box-shadow: var(--shadow-hero);
+}
+
+.surface-card-light {
+	background: var(--bg-panel-light);
+	border: var(--border-soft-light);
+	box-shadow: var(--shadow-card);
+}
+
+.transition-standard {
+	transition:
+		color var(--duration-fast) var(--ease-standard),
+		background-color var(--duration-fast) var(--ease-standard),
+		border-color var(--duration-fast) var(--ease-standard),
+		transform var(--duration-fast) var(--ease-standard),
+		opacity var(--duration-fast) var(--ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 1ms !important;
+		scroll-behavior: auto !important;
+	}
+}

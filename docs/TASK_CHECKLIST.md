@@ -28,11 +28,13 @@
       Acceptance: hero, about, career, contact, and site metadata live in `src/lib/data`.
       Note: these are placeholder portfolio data modules created as Milestone 1 scaffolding and will be refined in later milestones.
 
-- [ ] Replace starter global CSS with token-driven globals.
+- [x] Replace starter global CSS with token-driven globals.
       Acceptance: global stylesheet defines theme variables for color, spacing, radius, border, shadow, and motion.
+      Note: `src/routes/layout.css` now owns the tokenized global theme layer, base typography, focus styles, shared surface helpers, and reduced-motion defaults.
 
-- [ ] Add shared shell and layout primitives.
+- [x] Add shared shell and layout primitives.
       Acceptance: there is a reusable section wrapper and container strategy before section-specific styling begins.
+      Note: `AppShell`, `PageContainer`, and `SectionShell` are in place and already wired into the current scaffold homepage.
 
 ## Milestone 3: Navigation
 
