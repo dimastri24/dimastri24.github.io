@@ -36,6 +36,11 @@ Recommended pattern:
 - dev: empty base path
 - CI build: `BASE_PATH='/${{ github.event.repository.name }}'`
 
+For a user-site repository named `username.github.io`, the site is served from the root instead:
+
+- `https://username.github.io/`
+- keep `BASE_PATH` unset or empty in CI
+
 ## Root Page Options
 
 Standardize these at the root layout level:
@@ -64,7 +69,7 @@ Create a workflow at:
 - trigger on push to the main branch
 - install Node
 - install npm dependencies
-- build with `BASE_PATH`
+- build with `BASE_PATH` only for project-site deployments
 - upload the build artifact
 - deploy using GitHub Pages actions
 
@@ -99,7 +104,7 @@ If project-site deployment is used instead of `username.github.io`, the repo-nam
 1. Checkout repository
 2. Setup Node
 3. Install dependencies
-4. Export `BASE_PATH`
+4. Export `BASE_PATH` only if the site is deployed from a repo subpath
 5. Run `npm run build`
 6. Upload the build directory as the Pages artifact
 7. Deploy artifact to GitHub Pages

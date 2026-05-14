@@ -152,5 +152,6 @@
 - [ ] Validate base-path deployment.
       Acceptance: local verification confirms links and assets still resolve under a repo-name subpath assumption.
 
-- [ ] Add GitHub Actions deployment workflow.
+- [x] Add GitHub Actions deployment workflow.
       Acceptance: the repo contains an automated Pages deployment workflow aligned with the documented build path.
+      Note: `.github/workflows/deploy.yml` now targets root-path deployment for the `username.github.io` repository type. If deployment changes to a project site later, CI should provide `BASE_PATH`.
