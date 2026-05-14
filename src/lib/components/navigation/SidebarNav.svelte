@@ -15,7 +15,7 @@
 	aria-label={isMobile ? 'Section navigation mobile dock' : 'Section navigation'}
 	class={[
 		isMobile
-			? 'fixed inset-x-4 bottom-4 z-40 rounded-[calc(var(--radius-xl)+0.25rem)] border border-[var(--color-line-dark)] bg-[color:rgba(21,41,30,0.92)] p-2 shadow-[var(--shadow-float)] backdrop-blur'
+			? 'fixed inset-x-4 bottom-4 z-40 rounded-[calc(var(--radius-xl)+0.25rem)] border border-[var(--color-line-dark)] bg-[color:rgba(21,41,30,0.92)] p-2 shadow-[var(--shadow-float)] backdrop-blur lg:hidden'
 			: 'fixed top-1/2 left-4 z-40 hidden -translate-y-1/2 rounded-[calc(var(--radius-xl)+0.25rem)] border border-[var(--color-line-dark)] bg-[color:rgba(21,41,30,0.86)] p-2 shadow-[var(--shadow-float)] backdrop-blur lg:block'
 	]}
 >

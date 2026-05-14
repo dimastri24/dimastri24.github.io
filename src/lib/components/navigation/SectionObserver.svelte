@@ -9,7 +9,7 @@
 		threshold?: number | number[];
 	}
 
-	let { id, threshold = 0.3 }: Props = $props();
+	let { id, threshold = 0 }: Props = $props();
 
 	function handleEnter(event: CustomEvent<ObserverEventDetails>) {
 		if (event.detail.inView) {
@@ -19,8 +19,8 @@
 </script>
 
 <div
-	use:inview={{ rootMargin: '-32% 0px -52% 0px', threshold }}
+	use:inview={{ rootMargin: '0px', threshold }}
 	oninview_enter={handleEnter}
 	aria-hidden="true"
-	class="pointer-events-none absolute inset-x-0 top-0 h-px"
+	class="pointer-events-none absolute inset-x-0 top-[45vh] h-px"
 ></div>
