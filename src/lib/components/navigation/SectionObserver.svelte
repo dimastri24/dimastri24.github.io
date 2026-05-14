@@ -2,7 +2,7 @@
 	import { inview } from 'svelte-inview';
 	import type { ObserverEventDetails } from 'svelte-inview';
 	import type { SectionId } from '$lib/types';
-	import { setActiveSection } from '$lib/state/navigation.svelte';
+	import { navigationState, setActiveSection } from '$lib/state/navigation.svelte';
 
 	interface Props {
 		id: SectionId;
@@ -12,7 +12,7 @@
 	let { id, threshold = 0 }: Props = $props();
 
 	function handleEnter(event: CustomEvent<ObserverEventDetails>) {
-		if (event.detail.inView) {
+		if (event.detail.inView && !navigationState.isManualScrolling) {
 			setActiveSection(id);
 		}
 	}

@@ -1,20 +1,23 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import type { SectionId } from '$lib/types';
 	import { aboutContent, careerEntries, contactMethods, heroContent, navItems } from '$lib/data';
-	import { setActiveSection } from '$lib/state/navigation.svelte';
+	import { scrollToSection } from '$lib/state/navigation.svelte';
 
 	onMount(() => {
-		const syncHashSection = () => {
+		const syncHashSection = async () => {
 			const sectionId = window.location.hash.slice(1);
 
 			if (navItems.some((item) => item.id === sectionId)) {
-				setActiveSection(sectionId as SectionId);
+				await tick();
+				window.setTimeout(() => {
+					scrollToSection(sectionId as SectionId);
+				}, 0);
 			}
 		};
 
-		syncHashSection();
+		void syncHashSection();
 		window.addEventListener('hashchange', syncHashSection);
 
 		return () => {
