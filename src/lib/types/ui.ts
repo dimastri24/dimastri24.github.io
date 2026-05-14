@@ -16,6 +16,6 @@ export type IconName =
 export interface NavItem {
 	id: SectionId;
 	label: string;
-	href: `#${SectionId}`;
+	href: `/#${SectionId}`;
 	icon: IconName;
 }

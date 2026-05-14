@@ -1,6 +1,26 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
+	import type { SectionId } from '$lib/types';
 	import { aboutContent, careerEntries, contactMethods, heroContent, navItems } from '$lib/data';
+	import { setActiveSection } from '$lib/state/navigation.svelte';
+
+	onMount(() => {
+		const syncHashSection = () => {
+			const sectionId = window.location.hash.slice(1);
+
+			if (navItems.some((item) => item.id === sectionId)) {
+				setActiveSection(sectionId as SectionId);
+			}
+		};
+
+		syncHashSection();
+		window.addEventListener('hashchange', syncHashSection);
+
+		return () => {
+			window.removeEventListener('hashchange', syncHashSection);
+		};
+	});
 </script>
 
 <SectionShell id="home" variant="dark" size="hero" label="Homepage hero scaffold">

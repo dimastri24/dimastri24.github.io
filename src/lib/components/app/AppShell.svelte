@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import SidebarNav from '$lib/components/navigation/SidebarNav.svelte';
+	import { navItems } from '$lib/data';
+	import { navigationState } from '$lib/state/navigation.svelte';
 
 	interface Props {
 		showSidebar?: boolean;
@@ -23,7 +26,12 @@
 		></div>
 	</div>
 
-	<div class="relative z-10 min-h-screen lg:pl-[5.5rem]">
+	{#if showSidebar}
+		<SidebarNav items={navItems} activeSection={navigationState.activeSection} />
+		<SidebarNav items={navItems} activeSection={navigationState.activeSection} isMobile={true} />
+	{/if}
+
+	<div class="relative z-10 min-h-screen pb-28 lg:pb-0 lg:pl-[7.5rem]">
 		{@render children()}
 	</div>
 </div>

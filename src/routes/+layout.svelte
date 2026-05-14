@@ -13,6 +13,6 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<AppShell>
+<AppShell showSidebar={true}>
 	{@render children()}
 </AppShell>

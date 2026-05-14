@@ -38,19 +38,23 @@
 
 ## Milestone 3: Navigation
 
-- [ ] Build desktop fixed sidebar navigation.
+- [x] Build desktop fixed sidebar navigation.
       Acceptance: desktop viewport shows four icon-based nav actions linked to all homepage anchors.
+      Note: desktop navigation is implemented as a fixed left rail using shared navigation components and local SVG icons.
 
-- [ ] Build mobile sidebar adaptation.
+- [x] Build mobile sidebar adaptation.
       Acceptance: navigation remains easy to reach on small screens without obscuring section content.
+      Note: mobile navigation is implemented as a bottom dock, and the shell adds bottom padding so the dock does not cover section content.
 
-- [ ] Implement smooth section navigation.
+- [x] Implement smooth section navigation.
       Acceptance: activating a nav item scrolls to the correct section target without broken base-path behavior.
+      Note: nav links now resolve through SvelteKit path handling and use section anchors with global smooth scrolling.
 
-- [ ] Implement active-section state.
+- [x] Implement active-section state.
       Acceptance: the current section is visibly indicated while scrolling through the homepage.
+      Note: active state is driven by shared navigation state plus `svelte-inview` section observers and hash synchronization.
 
-- [ ] Add keyboard and focus support to nav items.
+- [x] Add keyboard and focus support to nav items.
       Acceptance: tabbing through navigation exposes clear focus states and fully usable actions.
 
 ## Milestone 4: Loading Screen

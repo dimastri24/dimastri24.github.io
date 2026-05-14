@@ -11,8 +11,8 @@ export const siteMetadata: SiteMetadata = {
 };
 
 export const navItems: NavItem[] = [
-	{ id: 'home', label: 'Home', href: '#home', icon: 'home' },
-	{ id: 'about', label: 'About', href: '#about', icon: 'user' },
-	{ id: 'career', label: 'Career', href: '#career', icon: 'briefcase' },
-	{ id: 'contact', label: 'Contact', href: '#contact', icon: 'mail' }
+	{ id: 'home', label: 'Home', href: '/#home', icon: 'home' },
+	{ id: 'about', label: 'About', href: '/#about', icon: 'user' },
+	{ id: 'career', label: 'Career', href: '/#career', icon: 'briefcase' },
+	{ id: 'contact', label: 'Contact', href: '/#contact', icon: 'mail' }
 ];

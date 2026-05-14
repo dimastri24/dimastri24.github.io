@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import SectionObserver from '$lib/components/navigation/SectionObserver.svelte';
 	import PageContainer from './PageContainer.svelte';
 	import type { SectionId, SectionSurface, ContainerSize } from '$lib/types';
 
@@ -24,6 +25,8 @@
 	}`}
 	data-surface={variant}
 >
+	<SectionObserver {id} />
+
 	{#if variant === 'dark'}
 		<div
 			class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0))]"
