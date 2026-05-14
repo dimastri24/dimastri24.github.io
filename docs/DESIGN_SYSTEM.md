@@ -15,19 +15,19 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --color-forest-950: #15291e;
-  --color-forest-900: #1b3326;
-  --color-forest-800: #254131;
-  --color-cream-50: #fffbdd;
-  --color-cream-100: #f7f1d2;
-  --color-gold-500: #b08d57;
-  --color-gold-400: #c6a26a;
-  --color-ink-900: #101612;
-  --color-ink-700: #2d372f;
-  --color-line-dark: rgba(255, 251, 221, 0.14);
-  --color-line-light: rgba(21, 41, 30, 0.14);
-  --color-shadow-dark: rgba(6, 10, 8, 0.28);
-  --color-shadow-soft: rgba(21, 41, 30, 0.12);
+	--color-forest-950: #15291e;
+	--color-forest-900: #1b3326;
+	--color-forest-800: #254131;
+	--color-cream-50: #fffbdd;
+	--color-cream-100: #f7f1d2;
+	--color-gold-500: #b08d57;
+	--color-gold-400: #c6a26a;
+	--color-ink-900: #101612;
+	--color-ink-700: #2d372f;
+	--color-line-dark: rgba(255, 251, 221, 0.14);
+	--color-line-light: rgba(21, 41, 30, 0.14);
+	--color-shadow-dark: rgba(6, 10, 8, 0.28);
+	--color-shadow-soft: rgba(21, 41, 30, 0.12);
 }
 ```
 
@@ -35,18 +35,18 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --bg-page: var(--color-forest-950);
-  --bg-panel-dark: rgba(255, 255, 255, 0.04);
-  --bg-panel-light: rgba(21, 41, 30, 0.04);
-  --bg-section-dark: var(--color-forest-950);
-  --bg-section-light: var(--color-cream-50);
-  --text-on-dark: var(--color-cream-50);
-  --text-on-light: var(--color-ink-900);
-  --text-muted-dark: rgba(255, 251, 221, 0.72);
-  --text-muted-light: rgba(16, 22, 18, 0.72);
-  --accent: var(--color-gold-500);
-  --accent-strong: var(--color-gold-400);
-  --focus-ring: rgba(176, 141, 87, 0.45);
+	--bg-page: var(--color-forest-950);
+	--bg-panel-dark: rgba(255, 255, 255, 0.04);
+	--bg-panel-light: rgba(21, 41, 30, 0.04);
+	--bg-section-dark: var(--color-forest-950);
+	--bg-section-light: var(--color-cream-50);
+	--text-on-dark: var(--color-cream-50);
+	--text-on-light: var(--color-ink-900);
+	--text-muted-dark: rgba(255, 251, 221, 0.72);
+	--text-muted-light: rgba(16, 22, 18, 0.72);
+	--accent: var(--color-gold-500);
+	--accent-strong: var(--color-gold-400);
+	--focus-ring: rgba(176, 141, 87, 0.45);
 }
 ```
 
@@ -54,16 +54,16 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+	--space-24: 6rem;
 }
 ```
 
@@ -71,11 +71,11 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --radius-sm: 0.5rem;
-  --radius-md: 0.875rem;
-  --radius-lg: 1.25rem;
-  --radius-xl: 1.75rem;
-  --radius-pill: 999px;
+	--radius-sm: 0.5rem;
+	--radius-md: 0.875rem;
+	--radius-lg: 1.25rem;
+	--radius-xl: 1.75rem;
+	--radius-pill: 999px;
 }
 ```
 
@@ -83,11 +83,11 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --border-soft-dark: 1px solid var(--color-line-dark);
-  --border-soft-light: 1px solid var(--color-line-light);
-  --shadow-card: 0 16px 40px var(--color-shadow-soft);
-  --shadow-hero: 0 30px 60px var(--color-shadow-dark);
-  --shadow-float: 0 24px 50px rgba(6, 10, 8, 0.22);
+	--border-soft-dark: 1px solid var(--color-line-dark);
+	--border-soft-light: 1px solid var(--color-line-light);
+	--shadow-card: 0 16px 40px var(--color-shadow-soft);
+	--shadow-hero: 0 30px 60px var(--color-shadow-dark);
+	--shadow-float: 0 24px 50px rgba(6, 10, 8, 0.22);
 }
 ```
 
@@ -95,12 +95,12 @@ Define tokens in global CSS variables and consume them through Tailwind-friendly
 
 ```css
 :root {
-  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --duration-fast: 160ms;
-  --duration-base: 260ms;
-  --duration-slow: 420ms;
+	--ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-soft: cubic-bezier(0.25, 0.1, 0.25, 1);
+	--ease-emphasis: cubic-bezier(0.2, 0.8, 0.2, 1);
+	--duration-fast: 160ms;
+	--duration-base: 260ms;
+	--duration-slow: 420ms;
 }
 ```
 

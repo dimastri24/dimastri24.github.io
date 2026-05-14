@@ -10,72 +10,72 @@ This breakdown defines the minimum component set required for implementation. Co
 export type SectionId = 'home' | 'about' | 'career' | 'contact';
 
 export interface NavItem {
-  id: SectionId;
-  label: string;
-  href: `/#${SectionId}`;
-  icon: string;
+	id: SectionId;
+	label: string;
+	href: `/#${SectionId}`;
+	icon: string;
 }
 
 export interface HeroBadge {
-  label: string;
+	label: string;
 }
 
 export interface HeroContent {
-  eyebrowOpenTags: string[];
-  heading: string;
-  roleLabels: string[];
-  ctaLabel: string;
-  ctaTarget: SectionId;
-  closingTags: string[];
-  markLetter: string;
+	eyebrowOpenTags: string[];
+	heading: string;
+	roleLabels: string[];
+	ctaLabel: string;
+	ctaTarget: SectionId;
+	closingTags: string[];
+	markLetter: string;
 }
 
 export interface AboutContent {
-  imageAlt: string;
-  intro: string[];
-  tools: string[];
+	imageAlt: string;
+	intro: string[];
+	tools: string[];
 }
 
 export interface CareerDetail {
-  label: string;
-  value: string;
+	label: string;
+	value: string;
 }
 
 export interface CareerEntry {
-  id: string;
-  month: string;
-  year: string;
-  rangeLabel: string;
-  role: string;
-  organization: string;
-  summary: string;
-  achievements: string[];
-  details: CareerDetail[];
-  technologies: string[];
+	id: string;
+	month: string;
+	year: string;
+	rangeLabel: string;
+	role: string;
+	organization: string;
+	summary: string;
+	achievements: string[];
+	details: CareerDetail[];
+	technologies: string[];
 }
 
 export interface ContactMethod {
-  id: string;
-  label: string;
-  value: string;
-  href: string;
-  icon: string;
-  external: boolean;
+	id: string;
+	label: string;
+	value: string;
+	href: string;
+	icon: string;
+	external: boolean;
 }
 
 export interface SocialLink {
-  id: string;
-  label: string;
-  href: string;
-  icon: string;
-  external: boolean;
+	id: string;
+	label: string;
+	href: string;
+	icon: string;
+	external: boolean;
 }
 
 export interface MotionPreset {
-  name: string;
-  duration: number;
-  easing: string;
-  delay?: number;
+	name: string;
+	duration: number;
+	easing: string;
+	delay?: number;
 }
 ```
 

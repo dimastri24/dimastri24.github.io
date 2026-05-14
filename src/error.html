@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Portfolio unavailable</title>
+		<style>
+			:root {
+				color-scheme: dark;
+				--bg: #15291e;
+				--panel: rgba(255, 251, 221, 0.08);
+				--line: rgba(255, 251, 221, 0.14);
+				--text: #fffbdd;
+				--muted: rgba(255, 251, 221, 0.72);
+				--accent: #c6a26a;
+				font-family:
+					'Segoe UI',
+					ui-sans-serif,
+					system-ui,
+					-apple-system,
+					BlinkMacSystemFont,
+					sans-serif;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				margin: 0;
+				min-height: 100vh;
+				display: grid;
+				place-items: center;
+				padding: 2rem;
+				background:
+					radial-gradient(circle at top, rgba(198, 162, 106, 0.18), transparent 30%),
+					linear-gradient(180deg, #1b3326 0%, #15291e 100%);
+				color: var(--text);
+			}
+
+			main {
+				width: min(100%, 42rem);
+				border: 1px solid var(--line);
+				border-radius: 1.5rem;
+				background: var(--panel);
+				padding: clamp(2rem, 5vw, 3rem);
+				box-shadow: 0 24px 60px rgba(6, 10, 8, 0.28);
+			}
+
+			p {
+				margin: 0;
+				color: var(--muted);
+				line-height: 1.7;
+			}
+
+			.status {
+				margin-bottom: 1rem;
+				color: var(--accent);
+				font-size: 0.875rem;
+				font-weight: 700;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+			}
+
+			h1 {
+				margin: 0 0 1rem;
+				font-size: clamp(2rem, 7vw, 3.5rem);
+				line-height: 0.95;
+			}
+
+			.actions {
+				margin-top: 2rem;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1rem;
+			}
+
+			a {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				border: 1px solid rgba(198, 162, 106, 0.3);
+				border-radius: 999px;
+				padding: 0.875rem 1.25rem;
+				color: var(--text);
+				text-decoration: none;
+				font-weight: 600;
+			}
+
+			a:hover,
+			a:focus-visible {
+				border-color: var(--accent);
+				outline: none;
+				background: rgba(198, 162, 106, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div class="status">Status %sveltekit.status%</div>
+			<h1>The portfolio is temporarily unavailable.</h1>
+			<p>%sveltekit.error.message%</p>
+			<div class="actions">
+				<a href="./">Return home</a>
+			</div>
+		</main>
+	</body>
+</html>
