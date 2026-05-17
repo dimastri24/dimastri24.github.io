@@ -1,11 +1,15 @@
 <script lang="ts">
+	import { cubicOut } from 'svelte/easing';
+	import type { TransitionConfig } from 'svelte/transition';
+
 	interface Props {
 		progress: number;
 		label: string;
 		stage: 'idle' | 'mounting' | 'document' | 'fonts' | 'ready';
+		reducedMotion?: boolean;
 	}
 
-	let { progress, label, stage }: Props = $props();
+	let { progress, label, stage, reducedMotion = false }: Props = $props();
 
 	const stageTitles: Record<Props['stage'], string> = {
 		idle: 'Preparing',
@@ -14,6 +18,26 @@
 		fonts: 'Loading type system',
 		ready: 'Ready'
 	};
+
+	function exitTransition(_node: Element): TransitionConfig {
+		if (reducedMotion) {
+			return {
+				duration: 140,
+				easing: cubicOut,
+				css: (t) => `opacity: ${t}`
+			};
+		}
+
+		return {
+			duration: 900,
+			easing: cubicOut,
+			css: (t, u) => {
+				const translateY = `${u * -100}%`;
+				const opacity = 1 - u * 0.18;
+				return `transform: translate3d(0, ${translateY}, 0); opacity: ${opacity};`;
+			}
+		};
+	}
 </script>
 
 <div
@@ -21,6 +45,7 @@
 	role="status"
 	aria-live="polite"
 	aria-label="Application loading"
+	out:exitTransition
 >
 	<div
 		class="loading-screen__panel w-full max-w-xl rounded-[var(--radius-xl)] px-6 py-8 sm:px-8 sm:py-10"
@@ -34,9 +59,16 @@
 					<h1 class="text-display max-w-[12ch] text-4xl leading-[0.95] font-semibold sm:text-5xl">
 						Dimas portfolio
 					</h1>
-					<p class="text-muted-dark max-w-[22rem] text-sm leading-7 sm:text-right">
-						{label}
-					</p>
+					<div class="flex max-w-[22rem] items-center gap-3 sm:justify-end">
+						<p class="text-muted-dark text-sm leading-7 sm:text-right">
+							{label}
+						</p>
+						<div class="loading-screen__dots" aria-hidden="true">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -94,6 +126,41 @@
 		transition: width var(--duration-base) var(--ease-standard);
 	}
 
+	.loading-screen__dots {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding-top: 0.125rem;
+	}
+
+	.loading-screen__dots span {
+		width: 0.4rem;
+		height: 0.4rem;
+		border-radius: 999px;
+		background: var(--accent-strong);
+		animation: loading-dot 620ms var(--ease-standard) infinite alternate;
+	}
+
+	.loading-screen__dots span:nth-child(2) {
+		animation-delay: 90ms;
+	}
+
+	.loading-screen__dots span:nth-child(3) {
+		animation-delay: 180ms;
+	}
+
+	@keyframes loading-dot {
+		from {
+			transform: translateY(0);
+			opacity: 0.45;
+		}
+
+		to {
+			transform: translateY(-0.3rem);
+			opacity: 1;
+		}
+	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.loading-screen {
 			backdrop-filter: none;
@@ -101,6 +168,11 @@
 
 		.loading-screen__meter-fill {
 			transition: none;
+		}
+
+		.loading-screen__dots span {
+			animation: none;
+			opacity: 0.9;
 		}
 	}
 </style>

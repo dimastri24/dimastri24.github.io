@@ -43,6 +43,7 @@
 			progress={appLoadingState.progress}
 			label={appLoadingState.label}
 			stage={appLoadingState.stage}
+			reducedMotion={appLoadingState.reducedMotion}
 		/>
 	{/if}
 

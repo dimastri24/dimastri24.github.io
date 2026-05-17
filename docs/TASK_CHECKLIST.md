@@ -59,13 +59,13 @@
 
 ## Milestone 4: Loading Screen
 
-- [ ] Implement the fullscreen loading overlay.
+- [x] Implement the fullscreen loading overlay.
       Acceptance: initial load shows "loading", animated dots, and a percentage counter.
 
-- [ ] Setup artificial smooth loading progress.
+- [x] Setup artificial smooth loading progress.
       Acceptance: the loading screen does not wait for an arbitrary long fixed timeout.
 
-- [ ] Add exit transition and reduced-motion fallback.
+- [x] Add exit transition and reduced-motion fallback.
       Acceptance: default mode slides the overlay away; reduced motion simplifies or removes the effect.
 
 ## Milestone 5: Hero
