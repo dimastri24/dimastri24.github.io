@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Snippet } from 'svelte';
+	import LoadingScreen from '$lib/components/app/LoadingScreen.svelte';
 	import SidebarNav from '$lib/components/navigation/SidebarNav.svelte';
 	import { navItems } from '$lib/data';
+	import { initializeAppLoading, appLoadingState } from '$lib/state/app-loading.svelte';
 	import { navigationState } from '$lib/state/navigation.svelte';
 
 	interface Props {
@@ -10,6 +13,10 @@
 	}
 
 	let { showSidebar = false, children }: Props = $props();
+
+	onMount(() => {
+		return initializeAppLoading();
+	});
 </script>
 
 <div
@@ -29,6 +36,14 @@
 	{#if showSidebar}
 		<SidebarNav items={navItems} activeSection={navigationState.activeSection} />
 		<SidebarNav items={navItems} activeSection={navigationState.activeSection} isMobile={true} />
+	{/if}
+
+	{#if appLoadingState.active}
+		<LoadingScreen
+			progress={appLoadingState.progress}
+			label={appLoadingState.label}
+			stage={appLoadingState.stage}
+		/>
 	{/if}
 
 	<div class="relative z-10 min-h-screen pb-28 lg:pb-0 lg:pl-[7.5rem]">

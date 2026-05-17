@@ -80,7 +80,7 @@ Implementation should follow dependency order, not visual order alone. Foundatio
 ### Tasks
 
 1. Build the fullscreen loading component.
-2. Implement a lightweight progression model tied to app readiness, not a fake delay.
+2. Implement a lightweight progression model with fake delay.
 3. Add animated dots and percentage display.
 4. Add upward exit transition with reduced-motion fallback.
 5. Ensure the homepage is still usable if the loading screen is skipped in reduced motion.

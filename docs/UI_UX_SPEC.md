@@ -81,7 +81,7 @@ export interface MotionPreset { name: string; duration: number; easing: string; 
 
 * **`+layout.svelte` / `+page.svelte` / `+error.svelte**`: Route-only containers. Layout hosts `AppShell` and handles initial global setup.
 * **`AppShell.svelte`**: Coordinates global sidebar visibility, layout shift, and loading overlay.
-* **`LoadingScreen.svelte`**: Covers viewport. Shows loading label, animated dots, and real progress-driven percentage counter (under `900ms` total).
+* **`LoadingScreen.svelte`**: Covers viewport. Shows loading label, animated dots, and artificial percentage counter (under `900ms` total).
 * *Exit Motion:* Slide up (`translateY(0)` to `-100%`) + slight fade over `540ms` using `--ease-standard`.
 
 

@@ -62,7 +62,7 @@
 - [ ] Implement the fullscreen loading overlay.
       Acceptance: initial load shows "loading", animated dots, and a percentage counter.
 
-- [ ] Wire loading completion to real app readiness.
+- [ ] Setup artificial smooth loading progress.
       Acceptance: the loading screen does not wait for an arbitrary long fixed timeout.
 
 - [ ] Add exit transition and reduced-motion fallback.
