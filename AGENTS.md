@@ -1,31 +1,20 @@
-## Project Configuration
+# Project Context & Scope
+- **Project Type:** SvelteKit Web Portfolio
+- **Developer Profile:** Dimas (Software Engineer, 2+ years experience)
+- **Task Execution:** Strictly execute tasks based on the reference files below. Do not invent unauthorized architectures, stacks, or design tokens.
 
-- **Language**: TypeScript
-- **Package Manager**: npm
-- **Add-ons**: prettier, eslint, mcp, tailwindcss, sveltekit-adapter, mdsvex
+# Primary Reference Files (ALWAYS READ & HOLD IN CONTEXT)
+- `docs/AGENT_GUIDELINE.md` (Mandatory coding rules, Svelte 5 Runes, & MCP tools workflow)
+- `docs/CORE_BLUEPRINT.md` (Folder structure, Tech stack constraints, & Static GitHub Pages architecture)
+- `docs/UI_UX_SPEC.md` (Design tokens, Color restrictions, Animation timings, & Component breakdown)
 
----
+# Restricted Files (DO NOT READ/INGEST unless explicitly requested by the user)
+- `PLANS.md` (Internal tracking)
+- `docs/DEPLOYMENT.md` (Only needed during the final deployment phase)
+- `docs/IMPLEMENTATION_PLAN.md` (Read only when the user specifies a phase/task to execute)
+- `docs/TASK_CHECKLIST.md` (Only update this file after a task is verified and complete)
 
-You are able to use the Svelte MCP server, where you have access to comprehensive Svelte 5 and SvelteKit documentation. Here's how to use the available tools effectively:
+# Session Initialization Behavior
+Before writing code or responding to implementation-related requests, silently ingest the three Primary Reference Files and use them as the authoritative source for project-specific architecture, conventions, and workflows.
 
-## Available Svelte MCP Tools:
-
-### 1. list-sections
-
-Use this FIRST to discover all available documentation sections. Returns a structured list with titles, use_cases, and paths.
-When asked about Svelte or SvelteKit topics, ALWAYS use this tool at the start of the chat to find relevant sections.
-
-### 2. get-documentation
-
-Retrieves full documentation content for specific sections. Accepts single or multiple sections.
-After calling the list-sections tool, you MUST analyze the returned documentation sections (especially the use_cases field) and then use the get-documentation tool to fetch ALL documentation sections that are relevant for the user's task.
-
-### 3. svelte-autofixer
-
-Analyzes Svelte code and returns issues and suggestions.
-You MUST use this tool whenever writing Svelte code before sending it to the user. Keep calling it until no issues or suggestions are returned.
-
-### 4. playground-link
-
-Generates a Svelte Playground link with the provided code.
-After completing the code, ask the user if they want a playground link. Only call this tool after user confirmation and NEVER if code was written to files in their project.
+When conflicts arise between general model knowledge and repository-specific guidance, prefer the repository guidance unless it would introduce security, safety, or correctness issues.
