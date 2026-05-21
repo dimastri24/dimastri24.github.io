@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import type { SectionId } from '$lib/types';
-	import { aboutContent, careerEntries, contactMethods, heroContent, navItems } from '$lib/data';
+	import { aboutContent, careerEntries, contactMethods, navItems } from '$lib/data';
 	import { scrollToSection } from '$lib/state/navigation.svelte';
 
 	onMount(() => {
@@ -26,47 +27,7 @@
 	});
 </script>
 
-<SectionShell id="home" variant="dark" size="hero" label="Homepage hero scaffold">
-	<div class="grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(18rem,0.8fr)] lg:items-end">
-		<div class="space-y-6">
-			<p class="text-code text-sm tracking-[0.24em] text-[var(--accent-strong)] uppercase">
-				{heroContent.eyebrowOpenTags.join(' ')}
-			</p>
-			<div class="space-y-4">
-				<p
-					class="text-display max-w-[14ch] text-5xl leading-[0.92] font-semibold text-balance sm:text-6xl lg:text-7xl"
-				>
-					Milestone 2
-				</p>
-				<p class="text-muted-dark max-w-3xl text-base leading-8 sm:text-lg">
-					Global tokens and shared layout primitives are in place. The visual shell is ready for
-					navigation, the loading layer, and section-specific components.
-				</p>
-			</div>
-			<div class="flex flex-wrap gap-3">
-				{#each heroContent.roleLabels as label (label)}
-					<span
-						class="transition-standard text-muted-dark rounded-[var(--radius-pill)] border border-[var(--color-line-dark)] bg-[var(--bg-panel-dark)] px-4 py-2 text-sm"
-					>
-						{label}
-					</span>
-				{/each}
-			</div>
-		</div>
-
-		<div
-			class="surface-card-dark rounded-[var(--radius-xl)] p-6 sm:p-8 lg:justify-self-end lg:p-10"
-		>
-			<p class="text-display text-[7rem] leading-none text-[var(--accent-strong)] sm:text-[9rem]">
-				{heroContent.markLetter}
-			</p>
-			<p class="text-muted-dark mt-4 text-sm leading-7">
-				App shell, spacing tokens, surface tokens, and section containers now define the base
-				composition.
-			</p>
-		</div>
-	</div>
-</SectionShell>
+<HeroSection />
 
 <SectionShell id="about" variant="light" label="About scaffold">
 	<div class="grid gap-6 lg:grid-cols-[minmax(16rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10">

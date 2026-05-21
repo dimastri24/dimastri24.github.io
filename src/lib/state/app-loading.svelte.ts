@@ -3,12 +3,12 @@ import { browser } from '$app/environment';
 type LoadStage = 'idle' | 'mounting' | 'document' | 'fonts' | 'ready';
 
 const state = $state({
-    active: true,                  // Always start as true
-    complete: false,               // Always start as false
-    reducedMotion: false,
-    progress: 0,                   // Always start at 0
-    stage: 'idle' as LoadStage,
-    label: 'Preparing portfolio'   // Always start with the loading label
+	active: true, // Always start as true
+	complete: false, // Always start as false
+	reducedMotion: false,
+	progress: 0, // Always start at 0
+	stage: 'idle' as LoadStage,
+	label: 'Preparing portfolio' // Always start with the loading label
 });
 
 export const appLoadingState = state;
