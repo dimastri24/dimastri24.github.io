@@ -5,8 +5,14 @@
 </script>
 
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import { heroContent, siteMetadata } from '$lib/data';
+	import { scrollToSection } from '$lib/state/navigation.svelte';
+
+	function handleCtaClick() {
+		scrollToSection(heroContent.ctaTarget);
+	}
 </script>
 
 <SectionShell id="home" variant="dark" size="hero" label="Introduction">
@@ -51,6 +57,18 @@
 				{/each}
 			</div>
 
+			<div>
+				<a
+					href={resolve(`/#${heroContent.ctaTarget}`)}
+					class="transition-standard text-code inline-flex items-center gap-3 rounded-[var(--radius-pill)] border border-[var(--accent)] bg-[rgba(255,251,221,0.06)] px-5 py-3 text-xs tracking-[0.2em] text-[var(--text-on-dark)] uppercase shadow-[0_18px_40px_rgba(6,10,8,0.22)] hover:-translate-y-[2px] hover:border-[var(--accent-strong)] hover:bg-[rgba(255,251,221,0.1)] focus-visible:-translate-y-[1px]"
+					aria-label={`Scroll to ${heroContent.ctaTarget} section`}
+					onclick={handleCtaClick}
+				>
+					<span>{heroContent.ctaLabel}</span>
+					<span aria-hidden="true" class="text-[var(--accent-strong)]">01</span>
+				</a>
+			</div>
+
 			<p
 				class="text-code text-xs tracking-[0.24em] text-[var(--text-muted-dark)] uppercase sm:text-sm"
 			>
@@ -74,10 +92,11 @@
 
 				<div class="space-y-3">
 					<p class="text-code text-xs tracking-[0.22em] text-[var(--text-muted-dark)] uppercase">
-						Next in milestone
+						CTA target
 					</p>
 					<p class="text-muted-dark max-w-sm text-sm leading-7">
-						The contact CTA and the large decorative mark land in the next hero tasks.
+						The primary action jumps straight to the contact section while the decorative mark
+						remains the next hero task.
 					</p>
 				</div>
 			</div>
