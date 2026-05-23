@@ -70,19 +70,19 @@
 
 ## Milestone 5: Hero
 
-- [ ] Build hero text composition.
+- [x] Build hero text composition.
       Acceptance: the hero renders code-tag accents, the main heading, role labels, and CTA.
 
-- [ ] Implement CTA scroll-to-contact behavior.
+- [x] Implement CTA scroll-to-contact behavior.
       Acceptance: activating the CTA reaches the contact section reliably.
 
-- [ ] Build the large decorative hero mark.
+- [x] Build the large decorative hero mark.
       Acceptance: the hero includes a prominent stylized "D" with depth and clear composition balance.
 
-- [ ] Add selective hero motion.
+- [x] Add selective hero motion.
       Acceptance: reveal and mark interaction feel polished without heavy libraries or distracting movement.
 
-- [ ] Validate mobile hero layout.
+- [x] Validate mobile hero layout.
       Acceptance: mobile view stacks cleanly with no overlap or clipped text.
 
 ## Milestone 6: About
