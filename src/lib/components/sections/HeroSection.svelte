@@ -18,9 +18,9 @@
 
 <SectionShell id="home" variant="dark" size="hero" label="Introduction">
 	<div
-		class="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-end lg:gap-14"
+		class="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(18rem,0.7fr)] lg:items-end lg:gap-14"
 	>
-		<div class="space-y-8 lg:space-y-10">
+		<div class="space-y-7 sm:space-y-8 lg:space-y-10">
 			<div class="hero-reveal space-y-4" style="--hero-delay: 0ms;">
 				<p
 					class="text-code text-xs tracking-[0.28em] text-[var(--accent-strong)] uppercase sm:text-sm"
@@ -36,7 +36,7 @@
 					</p>
 
 					<h1
-						class="text-display max-w-[13ch] text-5xl leading-[0.92] font-semibold text-balance sm:text-6xl lg:text-7xl"
+						class="text-display max-w-[12ch] text-4xl leading-[0.94] font-semibold text-balance sm:max-w-[13ch] sm:text-6xl lg:text-7xl"
 					>
 						{heroContent.heading}
 					</h1>
@@ -56,7 +56,7 @@
 			<div class="hero-reveal" style="--hero-delay: 160ms;">
 				<a
 					href={resolve(`/#${heroContent.ctaTarget}`)}
-					class="transition-standard text-code inline-flex items-center gap-3 rounded-[var(--radius-pill)] border border-[var(--accent)] bg-[rgba(255,251,221,0.06)] px-5 py-3 text-xs tracking-[0.2em] text-[var(--text-on-dark)] uppercase shadow-[0_18px_40px_rgba(6,10,8,0.22)] hover:-translate-y-[2px] hover:border-[var(--accent-strong)] hover:bg-[rgba(255,251,221,0.1)] focus-visible:-translate-y-[1px]"
+					class="transition-standard text-code inline-flex items-center justify-center gap-3 rounded-[var(--radius-pill)] border border-[var(--accent)] bg-[rgba(255,251,221,0.06)] px-5 py-3 text-xs tracking-[0.2em] text-[var(--text-on-dark)] uppercase shadow-[0_18px_40px_rgba(6,10,8,0.22)] hover:-translate-y-[2px] hover:border-[var(--accent-strong)] hover:bg-[rgba(255,251,221,0.1)] focus-visible:-translate-y-[1px] sm:w-auto"
 					aria-label={`Scroll to ${heroContent.ctaTarget} section`}
 					onclick={handleCtaClick}
 				>
@@ -72,7 +72,10 @@
 			</p>
 		</div>
 
-		<div class="hero-reveal hidden lg:block" style="--hero-delay: 130ms;">
+		<div
+			class="hero-reveal mx-auto w-full max-w-[17rem] sm:max-w-[21rem] lg:mx-0 lg:max-w-none"
+			style="--hero-delay: 130ms;"
+		>
 			<HeroMark letter={heroContent.markLetter} />
 		</div>
 	</div>
