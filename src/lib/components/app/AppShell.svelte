@@ -38,16 +38,43 @@
 		<SidebarNav items={navItems} activeSection={navigationState.activeSection} isMobile={true} />
 	{/if}
 
-	{#if appLoadingState.active}
-		<LoadingScreen
-			progress={appLoadingState.progress}
-			label={appLoadingState.label}
-			stage={appLoadingState.stage}
-			reducedMotion={appLoadingState.reducedMotion}
-		/>
-	{/if}
+	<!-- Wrap it in a div that controls the initial layout flash -->
+	<div class="loading-wrapper" class:hydrated={appLoadingState.complete}>
+		{#if appLoadingState.active}
+			<LoadingScreen
+				progress={appLoadingState.progress}
+				label={appLoadingState.label}
+				stage={appLoadingState.stage}
+				reducedMotion={appLoadingState.reducedMotion}
+			/>
+		{/if}
+	</div>
 
 	<div class="relative z-10 min-h-screen pb-28 lg:pb-0 lg:pl-[7.5rem]">
 		{@render children()}
 	</div>
 </div>
+
+<style>
+	/* 
+      By default, hide the loader using raw CSS. 
+      This ensures that if SvelteKit serves the static pre-rendered HTML 
+      during a quick back/forward/hash navigation, it won't render visually.
+    */
+	.loading-wrapper {
+		display: none;
+	}
+
+	/* 
+      Only show the loading wrapper if we are on a fresh initial load 
+      and the JavaScript state says it's actively loading.
+    */
+	:global(html:not(.js-already-loaded)) .loading-wrapper {
+		display: block;
+	}
+
+	/* Once complete is true, make sure it stays hidden */
+	.loading-wrapper.hydrated {
+		display: none !important;
+	}
+</style>

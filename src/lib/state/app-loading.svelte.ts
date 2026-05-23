@@ -2,13 +2,16 @@ import { browser } from '$app/environment';
 
 type LoadStage = 'idle' | 'mounting' | 'document' | 'fonts' | 'ready';
 
+// Read immediately when the module loads on the client side
+const alreadyLoaded = browser && sessionStorage.getItem('portfolio_loaded') === 'true';
+
 const state = $state({
-	active: true, // Always start as true
-	complete: false, // Always start as false
+	active: alreadyLoaded ? false : true, // 👈 Instant fix: Start as false if already loaded!
+	complete: alreadyLoaded ? true : false, // 👈 Mark as complete immediately
 	reducedMotion: false,
-	progress: 0, // Always start at 0
-	stage: 'idle' as LoadStage,
-	label: 'Preparing portfolio' // Always start with the loading label
+	progress: alreadyLoaded ? 100 : 0, // 👈 Skip progress if already done
+	stage: (alreadyLoaded ? 'ready' : 'idle') as LoadStage,
+	label: alreadyLoaded ? 'Ready' : 'Preparing portfolio'
 });
 
 export const appLoadingState = state;
@@ -19,10 +22,15 @@ function finishLoading() {
 	state.label = 'Ready';
 	state.active = false;
 	state.complete = true;
+
+	if (browser) {
+		sessionStorage.setItem('portfolio_loaded', 'true');
+	}
 }
 
 export function initializeAppLoading() {
-	if (!browser || state.complete) {
+	// If already loaded via sessionStorage or state says so, bail instantly
+	if (!browser || alreadyLoaded || state.complete) {
 		finishLoading();
 		return () => {};
 	}
@@ -35,7 +43,7 @@ export function initializeAppLoading() {
 		return () => {};
 	}
 
-	// Reset state awal
+	// Reset initial state (Only runs on a genuinely fresh visit!)
 	state.active = true;
 	state.complete = false;
 	state.progress = 0;
@@ -44,7 +52,6 @@ export function initializeAppLoading() {
 
 	let currentProgress = 0;
 
-	// Jalankan setiap 20ms (lebih cepat dari sebelumnya yang 30ms)
 	const interval = window.setInterval(() => {
 		if (currentProgress < 30) {
 			currentProgress += Math.random() * 2 + 2;
@@ -59,19 +66,16 @@ export function initializeAppLoading() {
 			state.stage = 'fonts';
 			state.label = 'Polishing details';
 		} else {
-			// UBAH BAGIAN INI JADI ELSE SAJA
-			// Semua angka di atas 95 akan masuk ke sini dan ditambah 1.5 terus sampai tembus 100
 			currentProgress += 1.5;
 		}
 
 		state.progress = Math.min(Math.floor(currentProgress), 100);
 
-		// JIKA SUDAH 100%, LANGSUNG BERHENTI
 		if (state.progress >= 100) {
 			clearInterval(interval);
 			finishLoading();
 		}
-	}, 20); // Mengubah dari 30ms ke 20ms membuat kalkulasi berjalan lebih sering
+	}, 20);
 
 	return () => {
 		clearInterval(interval);
