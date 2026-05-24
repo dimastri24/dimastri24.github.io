@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import AboutSection from '$lib/components/sections/AboutSection.svelte';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import type { SectionId } from '$lib/types';
-	import { aboutContent, careerEntries, contactMethods, navItems } from '$lib/data';
+	import { careerEntries, contactMethods, navItems } from '$lib/data';
 	import { scrollToSection } from '$lib/state/navigation.svelte';
 
 	onMount(() => {
@@ -29,29 +30,7 @@
 
 <HeroSection />
 
-<SectionShell id="about" variant="light" label="About scaffold">
-	<div class="grid gap-6 lg:grid-cols-[minmax(16rem,0.85fr)_minmax(0,1.15fr)] lg:gap-10">
-		<div class="surface-card-light rounded-[var(--radius-xl)] p-6 sm:p-8">
-			<p class="text-code text-xs tracking-[0.22em] text-[var(--accent)] uppercase">About shell</p>
-			<h2 class="text-display mt-4 text-3xl font-semibold sm:text-4xl">Content contract ready</h2>
-		</div>
-
-		<div class="space-y-5">
-			{#each aboutContent.intro as paragraph (paragraph)}
-				<p class="text-muted-light max-w-3xl text-base leading-8 sm:text-lg">{paragraph}</p>
-			{/each}
-			<div class="flex flex-wrap gap-3 pt-2">
-				{#each aboutContent.tools as tool (tool)}
-					<span
-						class="text-muted-light rounded-[var(--radius-pill)] border border-[var(--color-line-light)] bg-[var(--bg-panel-light)] px-4 py-2 text-sm"
-					>
-						{tool}
-					</span>
-				{/each}
-			</div>
-		</div>
-	</div>
-</SectionShell>
+<AboutSection />
 
 <SectionShell id="career" variant="dark" label="Career scaffold">
 	<div class="space-y-8">
