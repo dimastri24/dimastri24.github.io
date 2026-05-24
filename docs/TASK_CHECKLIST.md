@@ -87,13 +87,13 @@
 
 ## Milestone 6: About
 
-- [ ] Add profile image handling.
+- [x] Add profile image handling.
       Acceptance: the profile image loads via an approved asset strategy and does not cause layout shift.
 
-- [ ] Render about copy from typed data.
+- [x] Render about copy from typed data.
       Acceptance: no profile prose is hardcoded directly in the section component.
 
-- [ ] Add reveal animation with reduced-motion support.
+- [x] Add reveal animation with reduced-motion support.
       Acceptance: section entrance degrades gracefully when reduced motion is active.
 
 ## Milestone 7: Career Timeline

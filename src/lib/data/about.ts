@@ -1,10 +1,16 @@
 import type { AboutContent } from '$lib/types/content';
 
 export const aboutContent: AboutContent = {
-	imageAlt: 'Portrait placeholder for Dimas',
+	imageAlt: 'Portrait of Me',
 	intro: [
-		'I am Dimas, a software engineer with experience building web applications that need both clean interfaces and stable delivery.',
-		'My work usually sits between product thinking and implementation detail: shipping features, refining UX, and keeping the codebase maintainable for the next iteration.'
+		"I bridge the gap between heavy-lifting backend engineering and actual product delivery. With a little over two years of professional full-stack experience, I’ve spent my time building everything from scalable CMS platforms and APIs to automated data pipelines using PHP, Golang, and Python. I thrive in Agile teams and love integrating AI-assisted workflows to speed up development. Whether it's for enterprise, media, or government projects, I'm all about taking ideas and shipping them smoothly into production."
 	],
-	tools: ['TypeScript', 'SvelteKit', 'React', 'Node.js', 'PostgreSQL', 'Tailwind CSS']
+	tools: [
+		'PHP (CI / Laravel)',
+		'Python',
+		'Golang',
+		'Node.js',
+		'PostgreSQL',
+		'Bootstrap / Tailwind CSS'
+	]
 };

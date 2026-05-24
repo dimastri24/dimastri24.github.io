@@ -54,7 +54,7 @@
 		>
 			<div class="space-y-4">
 				<p class="text-code text-xs tracking-[0.24em] text-[var(--accent)] uppercase">About</p>
-				<h2 class="text-display max-w-[12ch] text-3xl leading-tight font-semibold sm:text-4xl">
+				<h2 class="text-display text-3xl leading-tight font-semibold sm:text-4xl">
 					Engineer-minded product delivery.
 				</h2>
 			</div>
