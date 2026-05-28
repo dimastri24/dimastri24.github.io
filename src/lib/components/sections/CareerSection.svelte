@@ -9,6 +9,21 @@
     let revealedEntryIds = $state<string[]>([]);
     let expandedEntryId = $state<string | null>(null);
 
+    let activeEntry = $derived(careerEntries.find(e => e.id === expandedEntryId) || null);
+
+    // FIX UX POIN 5: Mengunci scroll body saat modal aktif agar terasa premium
+    $effect(() => {
+        if (expandedEntryId) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    });
+
     function revealIntro(event: CustomEvent<ObserverEventDetails>) {
         if (event.detail.inView) {
             introRevealed = true;
@@ -29,15 +44,13 @@
         expandedEntryId = expandedEntryId === entryId ? null : entryId;
     }
 
-    function dismissDetails(entryId: string) {
-        if (expandedEntryId === entryId) {
-            expandedEntryId = null;
-        }
+    function dismissDetails() {
+        expandedEntryId = null;
     }
 
     function handleWindowKeydown(event: KeyboardEvent) {
         if (event.key === 'Escape' && expandedEntryId) {
-            dismissDetails(expandedEntryId);
+            dismissDetails();
         }
     }
 </script>
@@ -142,7 +155,7 @@
 
                             <button
                                 type="button"
-                                aria-controls={`career-detail-${entry.id}`}
+                                aria-controls={expandedEntryId === entry.id ? `career-detail-${entry.id}` : undefined}
                                 aria-expanded={expandedEntryId === entry.id}
                                 class:career-item__toggle--active={expandedEntryId === entry.id}
                                 class="career-item__toggle text-code rounded-[var(--radius-pill)] px-4 py-2 text-[0.68rem] tracking-[0.18em] uppercase"
@@ -151,72 +164,6 @@
                                 {expandedEntryId === entry.id ? 'Hide details' : 'View details'}
                             </button>
                         </div>
-
-                        {#if expandedEntryId === entry.id}
-                            <button
-                                type="button"
-                                class="career-detail-backdrop"
-                                aria-label={`Close ${entry.role} details`}
-                                onclick={() => dismissDetails(entry.id)}
-                                transition:fade={{ duration: 180 }}
-                            ></button>
-
-                            <div
-                                id={`career-detail-${entry.id}`}
-                                class="career-detail-card space-y-5 rounded-[var(--radius-md)] border border-[rgba(255,251,221,0.16)] bg-[#0c1410] p-4 shadow-[0_24px_60px_rgba(6,10,8,0.65)] sm:p-5"
-                                role="region"
-                                aria-label={`${entry.role} detail card`}
-                                transition:fade={{ duration: 180 }}
-                            >
-                                <div class="career-detail-card__header flex items-start justify-between gap-4">
-                                    <div class="space-y-3">
-                                        <p class="text-code text-[0.68rem] tracking-[0.18em] text-[var(--accent-strong)] uppercase">
-                                            Key outcomes
-                                        </p>
-
-                                        <div class="space-y-1.5">
-                                            <h4 class="text-lg font-semibold text-[var(--text-on-dark)]">
-                                                {entry.role}
-                                            </h4>
-                                            <p
-                                                class="text-code text-[0.68rem] tracking-[0.16em] text-[var(--text-muted-dark)] uppercase"
-                                            >
-                                                {entry.organization}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <button
-                                        type="button"
-                                        class="career-detail-card__close text-code rounded-[var(--radius-pill)] px-3 py-1.5 text-[0.64rem] tracking-[0.16em] uppercase"
-                                        onclick={() => dismissDetails(entry.id)}
-                                    >
-                                        Close
-                                    </button>
-                                </div>
-
-                                <ul class="space-y-3">
-                                    {#each entry.achievements as achievement (achievement)}
-                                        <li class="career-detail-card__achievement">{achievement}</li>
-                                    {/each}
-                                </ul>
-
-                                <dl class="grid gap-3 sm:grid-cols-2">
-                                    {#each entry.details as detail (detail.label)}
-                                        <div class="career-detail-card__meta rounded-[var(--radius-sm)] px-3 py-3">
-                                            <dt
-                                                class="text-code text-[0.64rem] tracking-[0.16em] text-[var(--text-muted-dark)] uppercase"
-                                            >
-                                                {detail.label}
-                                            </dt>
-                                            <dd class="mt-2 text-sm leading-6 text-[var(--text-on-dark)]">
-                                                {detail.value}
-                                            </dd>
-                                        </div>
-                                    {/each}
-                                </dl>
-                            </div>
-                        {/if}
                     </div>
                 </article>
             {/each}
@@ -224,7 +171,132 @@
     </div>
 </SectionShell>
 
+{#if activeEntry}
+    <div
+        class="career-detail-backdrop"
+        role="presentation"
+        onclick={dismissDetails}
+        transition:fade={{ duration: 180 }}
+    ></div>
+
+    <div
+        id={`career-detail-${activeEntry.id}`}
+        class="career-detail-card space-y-5 rounded-[var(--radius-md)] border border-[rgba(255,251,221,0.16)] p-4 shadow-[0_24px_60px_rgba(6,10,8,0.85)] sm:p-5"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${activeEntry.role} detail card`}
+        transition:fade={{ duration: 180 }}
+    >
+        <div class="career-detail-card__header flex items-start justify-between gap-4">
+            <div class="space-y-3">
+                <p class="text-code text-[0.68rem] tracking-[0.18em] text-[var(--accent-strong)] uppercase">
+                    Key outcomes
+                </p>
+
+                <div class="space-y-1.5">
+                    <h4 class="text-lg font-semibold text-[var(--text-on-dark)]">
+                        {activeEntry.role}
+                    </h4>
+                    <p class="text-code text-[0.68rem] tracking-[0.16em] text-[var(--text-muted-dark)] uppercase">
+                        {activeEntry.organization}
+                    </p>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="career-detail-card__close text-code rounded-[var(--radius-pill)] px-3 py-1.5 text-[0.64rem] tracking-[0.16em] uppercase"
+                onclick={dismissDetails}
+            >
+                Close
+            </button>
+        </div>
+
+        <ul class="space-y-3">
+            {#each activeEntry.achievements as achievement (achievement)}
+                <li class="career-detail-card__achievement">{achievement}</li>
+            {/each}
+        </ul>
+
+        <dl class="grid gap-3 sm:grid-cols-2">
+            {#each activeEntry.details as detail (detail.label)}
+                <div class="career-detail-card__meta rounded-[var(--radius-sm)] px-3 py-3">
+                    <dt class="text-code text-[0.64rem] tracking-[0.16em] text-[var(--text-muted-dark)] uppercase">
+                        {detail.label}
+                    </dt>
+                    <dd class="mt-2 text-sm leading-6 text-[var(--text-on-dark)]">
+                        {detail.value}
+                    </dd>
+                </div>
+            {/each}
+        </dl>
+    </div>
+{/if}
+
 <style>
+    .career-detail-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        background: rgba(6, 10, 8, 0.75);
+        backdrop-filter: blur(4px);
+        cursor: pointer;
+    }
+
+    .career-detail-card {
+        position: fixed;
+        /* FIX UX POIN 3 & 4: Trik pemusatan posisi absolut/fixed yang jauh lebih stabil browser-wide */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        width: min(34rem, calc(100vw - 2rem));
+        height: fit-content;
+        max-height: min(85vh, 36rem);
+        overflow-y: auto;
+        background-color: #0c1410 !important;
+        box-shadow: 0 24px 60px rgba(6, 10, 8, 0.85);
+    }
+
+    .career-detail-card__achievement {
+        position: relative;
+        padding-left: 1.05rem;
+        color: var(--text-muted-dark);
+        line-height: 1.7;
+    }
+
+    .career-detail-card__achievement::before {
+        content: '';
+        position: absolute;
+        top: 0.7rem;
+        left: 0;
+        width: 0.4rem;
+        height: 0.4rem;
+        border-radius: 999px;
+        background: var(--accent);
+    }
+
+    .career-detail-card__meta {
+        border: 1px solid rgba(255, 251, 221, 0.1);
+        background: rgba(255, 255, 255, 0.022);
+    }
+
+    .career-detail-card__close {
+        border: 1px solid rgba(255, 251, 221, 0.14);
+        color: var(--text-on-dark);
+        background: rgba(255, 255, 255, 0.04);
+        transition:
+            border-color var(--duration-fast) var(--ease-standard),
+            background-color var(--duration-fast) var(--ease-standard);
+    }
+
+    .career-detail-card__close:focus-visible,
+    .career-detail-card__close:hover {
+        outline: none;
+        border-color: var(--accent-strong);
+        background: rgba(255, 255, 255, 0.08);
+    }
+
     .career-timeline::before {
         content: '';
         position: absolute;
@@ -320,64 +392,6 @@
         background: rgba(198, 162, 106, 0.08);
     }
 
-    .career-detail-backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: 29;
-        backdrop-filter: blur(4px); /* Softly blurs underlying content for focus */
-    }
-
-    .career-detail-card {
-        position: fixed;
-        inset: 0;
-        margin: auto; /* Vertically and horizontally centers the card in viewport */
-        z-index: 30;
-        width: calc(100vw - 2rem);
-        max-width: 34rem;
-        height: fit-content;
-        max-height: min(85vh, 36rem);
-        overflow-y: auto;
-    }
-
-    .career-detail-card__achievement {
-        position: relative;
-        padding-left: 1.05rem;
-        color: var(--text-muted-dark);
-        line-height: 1.7;
-    }
-
-    .career-detail-card__achievement::before {
-        content: '';
-        position: absolute;
-        top: 0.7rem;
-        left: 0;
-        width: 0.4rem;
-        height: 0.4rem;
-        border-radius: 999px;
-        background: var(--accent);
-    }
-
-    .career-detail-card__meta {
-        border: 1px solid rgba(255, 251, 221, 0.1);
-        background: rgba(255, 255, 255, 0.022);
-    }
-
-    .career-detail-card__close {
-        border: 1px solid rgba(255, 251, 221, 0.14);
-        color: var(--text-on-dark);
-        background: rgba(255, 255, 255, 0.04);
-        transition:
-            border-color var(--duration-fast) var(--ease-standard),
-            background-color var(--duration-fast) var(--ease-standard);
-    }
-
-    .career-detail-card__close:focus-visible,
-    .career-detail-card__close:hover {
-        outline: none;
-        border-color: var(--accent-strong);
-        background: rgba(255, 255, 255, 0.08);
-    }
-
     .career-reveal {
         opacity: 0;
         transform: translate3d(0, 20px, 0);
@@ -401,11 +415,6 @@
     @media (min-width: 1024px) {
         .career-item__date {
             text-align: right;
-        }
-
-        /* Restores backdrop on desktop to maintain unified modal style behavior */
-        .career-detail-backdrop {
-            display: block;
         }
     }
 
