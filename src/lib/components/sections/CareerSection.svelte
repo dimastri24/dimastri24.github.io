@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import { inview } from 'svelte-inview';
     import { fade } from 'svelte/transition';
     import type { ObserverEventDetails } from 'svelte-inview';
@@ -9,37 +8,6 @@
     let introRevealed = $state(false);
     let revealedEntryIds = $state<string[]>([]);
     let expandedEntryId = $state<string | null>(null);
-    let previewedEntryId = $state<string | null>(null);
-    let supportsHover = $state(false);
-
-    let activeDetailId = $derived(expandedEntryId ?? previewedEntryId);
-
-    function syncMediaQueryState(query: MediaQueryList, updater: (matches: boolean) => void) {
-        updater(query.matches);
-
-        const handleChange = (event: MediaQueryListEvent) => {
-            updater(event.matches);
-        };
-
-        query.addEventListener('change', handleChange);
-
-        return () => {
-            query.removeEventListener('change', handleChange);
-        };
-    }
-
-    onMount(() => {
-        const hoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
-
-        const stopHoverSync = syncMediaQueryState(hoverQuery, (matches) => {
-            supportsHover = matches;
-            previewedEntryId = null;
-        });
-
-        return () => {
-            stopHoverSync();
-        };
-    });
 
     function revealIntro(event: CustomEvent<ObserverEventDetails>) {
         if (event.detail.inView) {
@@ -57,38 +25,19 @@
         return revealedEntryIds.includes(entryId);
     }
 
-    function isDetailVisible(entryId: string) {
-        return activeDetailId === entryId;
-    }
-
-    function openDetailPreview(entryId: string) {
-        if (expandedEntryId !== entryId) {
-            previewedEntryId = entryId;
-        }
-    }
-
-    function closeDetailPreview(entryId: string) {
-        if (previewedEntryId === entryId && expandedEntryId !== entryId) {
-            previewedEntryId = null;
-        }
-    }
-
     function toggleDetails(entryId: string) {
         expandedEntryId = expandedEntryId === entryId ? null : entryId;
-        // On click, dismiss hover states to keep the toggle absolute
-        previewedEntryId = null;
     }
 
     function dismissDetails(entryId: string) {
-        if (activeDetailId === entryId || expandedEntryId === entryId) {
+        if (expandedEntryId === entryId) {
             expandedEntryId = null;
-            previewedEntryId = null;
         }
     }
 
     function handleWindowKeydown(event: KeyboardEvent) {
-        if (event.key === 'Escape' && activeDetailId) {
-            dismissDetails(activeDetailId);
+        if (event.key === 'Escape' && expandedEntryId) {
+            dismissDetails(expandedEntryId);
         }
     }
 </script>
@@ -143,7 +92,7 @@
                     </div>
 
                     <div
-                        class:career-item__panel--active={isDetailVisible(entry.id)}
+                        class:career-item__panel--active={expandedEntryId === entry.id}
                         class="career-item__panel surface-card-dark rounded-[var(--radius-lg)] p-5 sm:p-6 lg:ml-2 lg:min-h-[12rem]"
                     >
                         <div
@@ -197,30 +146,24 @@
                                 aria-expanded={expandedEntryId === entry.id}
                                 class:career-item__toggle--active={expandedEntryId === entry.id}
                                 class="career-item__toggle text-code rounded-[var(--radius-pill)] px-4 py-2 text-[0.68rem] tracking-[0.18em] uppercase"
-                                onmouseenter={() => supportsHover && openDetailPreview(entry.id)}
-                                onmouseleave={() => supportsHover && closeDetailPreview(entry.id)}
-                                onfocus={() => supportsHover && openDetailPreview(entry.id)}
-                                onblur={() => supportsHover && closeDetailPreview(entry.id)}
                                 onclick={() => toggleDetails(entry.id)}
                             >
                                 {expandedEntryId === entry.id ? 'Hide details' : 'View details'}
                             </button>
                         </div>
 
-                        {#if isDetailVisible(entry.id)}
-                            {#if expandedEntryId === entry.id}
-                                <button
-                                    type="button"
-                                    class="career-detail-backdrop"
-                                    aria-label={`Close ${entry.role} details`}
-                                    onclick={() => dismissDetails(entry.id)}
-                                    transition:fade={{ duration: 180 }}
-                                ></button>
-                            {/if}
+                        {#if expandedEntryId === entry.id}
+                            <button
+                                type="button"
+                                class="career-detail-backdrop"
+                                aria-label={`Close ${entry.role} details`}
+                                onclick={() => dismissDetails(entry.id)}
+                                transition:fade={{ duration: 180 }}
+                            ></button>
 
                             <div
                                 id={`career-detail-${entry.id}`}
-                                class="career-detail-card space-y-5 rounded-[var(--radius-md)] border border-[rgba(255,251,221,0.16)] bg-[rgba(18,32,24,0.98)] p-4 shadow-[0_24px_60px_rgba(6,10,8,0.34)] sm:p-5"
+                                class="career-detail-card space-y-5 rounded-[var(--radius-md)] border border-[rgba(255,251,221,0.16)] bg-[#0c1410] p-4 shadow-[0_24px_60px_rgba(6,10,8,0.65)] sm:p-5"
                                 role="region"
                                 aria-label={`${entry.role} detail card`}
                                 transition:fade={{ duration: 180 }}
@@ -381,16 +324,18 @@
         position: fixed;
         inset: 0;
         z-index: 29;
-        background: rgba(6, 10, 8, 0.46);
+        backdrop-filter: blur(4px); /* Softly blurs underlying content for focus */
     }
 
     .career-detail-card {
         position: fixed;
-        right: 1rem;
-        left: 1rem;
-        bottom: 1rem;
+        inset: 0;
+        margin: auto; /* Vertically and horizontally centers the card in viewport */
         z-index: 30;
-        max-height: min(70vh, 34rem);
+        width: calc(100vw - 2rem);
+        max-width: 34rem;
+        height: fit-content;
+        max-height: min(85vh, 36rem);
         overflow-y: auto;
     }
 
@@ -458,19 +403,9 @@
             text-align: right;
         }
 
+        /* Restores backdrop on desktop to maintain unified modal style behavior */
         .career-detail-backdrop {
-            display: none;
-        }
-
-        .career-detail-card {
-            position: absolute;
-            top: 100%; /* Positions the popover cleanly under the timeline item button */
-            right: 0;
-            left: auto;
-            bottom: auto;
-            width: min(32rem, calc(100vw - 4rem));
-            max-height: 28rem;
-            pointer-events: auto; /* Prevents unwanted hover structural drop loops */
+            display: block;
         }
     }
 
