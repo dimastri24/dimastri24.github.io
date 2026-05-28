@@ -1,10 +1,11 @@
 <script lang="ts">
+	import CareerSection from '$lib/components/sections/CareerSection.svelte';
 	import { onMount, tick } from 'svelte';
 	import AboutSection from '$lib/components/sections/AboutSection.svelte';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import type { SectionId } from '$lib/types';
-	import { careerEntries, contactMethods, navItems } from '$lib/data';
+	import { contactMethods, navItems } from '$lib/data';
 	import { scrollToSection } from '$lib/state/navigation.svelte';
 
 	onMount(() => {
@@ -32,37 +33,7 @@
 
 <AboutSection />
 
-<SectionShell id="career" variant="dark" label="Career scaffold">
-	<div class="space-y-8">
-		<div class="max-w-3xl space-y-3">
-			<p class="text-code text-xs tracking-[0.22em] text-[var(--accent-strong)] uppercase">
-				Career timeline shell
-			</p>
-			<h2 class="text-display text-3xl font-semibold sm:text-4xl">Timeline primitives come next</h2>
-		</div>
-
-		<div class="grid gap-4">
-			{#each careerEntries as entry (entry.id)}
-				<article
-					class="surface-card-dark rounded-[var(--radius-lg)] p-5 sm:p-6 lg:grid lg:grid-cols-[10rem_minmax(0,1fr)] lg:gap-6"
-				>
-					<div class="mb-4 lg:mb-0">
-						<p class="text-sm tracking-[0.18em] text-[var(--accent-strong)] uppercase">
-							{entry.rangeLabel}
-						</p>
-					</div>
-					<div class="space-y-2">
-						<h3 class="text-xl font-semibold">{entry.role}</h3>
-						<p class="text-muted-dark text-sm tracking-[0.12em] uppercase">
-							{entry.organization}
-						</p>
-						<p class="text-muted-dark max-w-3xl text-base leading-7">{entry.summary}</p>
-					</div>
-				</article>
-			{/each}
-		</div>
-	</div>
-</SectionShell>
+<CareerSection />
 
 <SectionShell id="contact" variant="light" label="Contact scaffold">
 	<div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-10">
