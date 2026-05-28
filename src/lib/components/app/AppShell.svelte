@@ -39,7 +39,7 @@
 	{/if}
 
 	<!-- Wrap it in a div that controls the initial layout flash -->
-	<div class="loading-wrapper" class:hydrated={appLoadingState.complete}>
+	<div class="loading-wrapper" class:hydrated={!appLoadingState.active}>
 		{#if appLoadingState.active}
 			<LoadingScreen
 				progress={appLoadingState.progress}
@@ -56,25 +56,18 @@
 </div>
 
 <style>
-	/* 
-      By default, hide the loader using raw CSS. 
-      This ensures that if SvelteKit serves the static pre-rendered HTML 
-      during a quick back/forward/hash navigation, it won't render visually.
-    */
-	.loading-wrapper {
-		display: none;
-	}
+    /* By default, hide the loader using raw CSS. */
+    .loading-wrapper {
+        display: none;
+    }
 
-	/* 
-      Only show the loading wrapper if we are on a fresh initial load 
-      and the JavaScript state says it's actively loading.
-    */
-	:global(html:not(.js-already-loaded)) .loading-wrapper {
-		display: block;
-	}
+    /* Only show it on a fresh initial load */
+    :global(html:not(.js-already-loaded)) .loading-wrapper {
+        display: block;
+    }
 
-	/* Once complete is true, make sure it stays hidden */
-	.loading-wrapper.hydrated {
-		display: none !important;
-	}
+    /* Once the inner transition finishes and the block unmounts, hide it safely */
+    .loading-wrapper.hydrated {
+        display: none;
+    }
 </style>
