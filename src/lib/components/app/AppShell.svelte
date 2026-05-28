@@ -56,18 +56,18 @@
 </div>
 
 <style>
-    /* By default, hide the loader using raw CSS. */
-    .loading-wrapper {
-        display: none;
-    }
+	/* By default, hide the loader using raw CSS. */
+	.loading-wrapper {
+		display: none;
+	}
 
-    /* Only show it on a fresh initial load */
-    :global(html:not(.js-already-loaded)) .loading-wrapper {
-        display: block;
-    }
+	/* Only show it on a fresh initial load */
+	:global(html:not(.js-already-loaded)) .loading-wrapper {
+		display: block;
+	}
 
-    /* Once the inner transition finishes and the block unmounts, hide it safely */
-    .loading-wrapper.hydrated {
-        display: none;
-    }
+	/* Once the inner transition finishes and the block unmounts, hide it safely */
+	.loading-wrapper.hydrated {
+		display: none;
+	}
 </style>
