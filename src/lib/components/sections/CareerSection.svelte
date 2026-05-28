@@ -21,7 +21,7 @@
 				<article
 					class="career-item grid gap-4 rounded-[var(--radius-lg)] border border-[var(--color-line-dark)] bg-[rgba(255,255,255,0.025)] p-5 shadow-[0_18px_42px_rgba(6,10,8,0.12)] sm:p-6 lg:grid-cols-[8rem_3rem_minmax(0,1fr)] lg:gap-0 lg:border-none lg:bg-transparent lg:p-0 lg:shadow-none"
 				>
-					<div class="career-item__date lg:pr-6">
+					<div class="career-item__date hidden lg:block lg:pr-6">
 						<p class="text-code text-xs tracking-[0.2em] text-[var(--accent-strong)] uppercase">
 							{entry.month}
 						</p>
@@ -39,6 +39,25 @@
 					<div
 						class="surface-card-dark rounded-[var(--radius-lg)] p-5 sm:p-6 lg:ml-2 lg:min-h-[12rem]"
 					>
+						<div
+							class="career-item__mobile-date mb-5 flex items-start justify-between gap-4 border-b border-[var(--color-line-dark)] pb-4 lg:hidden"
+						>
+							<div>
+								<p class="text-code text-[0.68rem] tracking-[0.2em] text-[var(--accent-strong)] uppercase">
+									{entry.month}
+								</p>
+								<p class="mt-2 text-2xl leading-none font-semibold text-[var(--text-on-dark)]">
+									{entry.year}
+								</p>
+							</div>
+
+							<p
+								class="text-code text-right text-[0.68rem] tracking-[0.16em] text-[var(--text-muted-dark)] uppercase"
+							>
+								{entry.rangeLabel}
+							</p>
+						</div>
+
 						<div class="space-y-3">
 							<div class="space-y-2">
 								<h3 class="text-xl font-semibold sm:text-2xl">{entry.role}</h3>
@@ -85,6 +104,10 @@
 
 	.career-item__date {
 		text-align: left;
+	}
+
+	.career-item__mobile-date {
+		align-items: end;
 	}
 
 	.career-item__line {
