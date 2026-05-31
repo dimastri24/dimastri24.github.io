@@ -1,4 +1,4 @@
-import type { IconName } from "./ui";
+import type { IconName } from './ui';
 
 export type SectionId = 'home' | 'about' | 'career' | 'contact';
 

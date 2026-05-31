@@ -1,9 +1,15 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import type { RouteId } from '../../../routes/$types';
+	import { inview } from 'svelte-inview';
+	import type { ObserverEventDetails } from 'svelte-inview';
 	import SectionShell from '$lib/components/layout/SectionShell.svelte';
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import { contactMethods, socialLinks } from '$lib/data';
+
+	let introRevealed = $state(false);
+	let methodsRevealed = $state(false);
+	let socialsRevealed = $state(false);
 
 	const isExternalOrProtocol = (url: string) => {
 		return (
@@ -13,11 +19,35 @@
 			url.startsWith('https:')
 		);
 	};
+
+	function revealIntro(event: CustomEvent<ObserverEventDetails>) {
+		if (event.detail.inView) {
+			introRevealed = true;
+		}
+	}
+
+	function revealMethods(event: CustomEvent<ObserverEventDetails>) {
+		if (event.detail.inView) {
+			methodsRevealed = true;
+		}
+	}
+
+	function revealSocials(event: CustomEvent<ObserverEventDetails>) {
+		if (event.detail.inView) {
+			socialsRevealed = true;
+		}
+	}
 </script>
 
 <SectionShell id="contact" variant="light" label="Contact">
 	<div class="grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start lg:gap-12">
-		<div class="max-w-2xl space-y-4 sm:space-y-5">
+		<div
+			use:inview={{ threshold: 0.2, unobserveOnEnter: true }}
+			oninview_change={revealIntro}
+			class:contact-reveal={true}
+			class:contact-reveal--visible={introRevealed}
+			class="max-w-2xl space-y-4 sm:space-y-5"
+		>
 			<p class="text-code text-xs tracking-[0.22em] text-[var(--accent)] uppercase">Contact</p>
 			<h2 class="text-display text-3xl font-semibold sm:text-4xl">
 				Let&apos;s keep the conversation direct.
@@ -30,7 +60,12 @@
 
 		<div class="space-y-5">
 			<section
+				use:inview={{ threshold: 0.18, unobserveOnEnter: true }}
+				oninview_change={revealMethods}
+				class:contact-reveal={true}
+				class:contact-reveal--visible={methodsRevealed}
 				class="surface-card-light rounded-[var(--radius-xl)] p-5 shadow-[var(--shadow-card)] sm:p-6"
+				style="--contact-reveal-delay: 70ms;"
 			>
 				<div class="space-y-1">
 					<h3 class="text-lg font-semibold text-[var(--text-on-light)] sm:text-xl">
@@ -42,7 +77,7 @@
 				</div>
 
 				<ul class="mt-5 space-y-3">
-					{#each contactMethods as method (method.id)}
+					{#each contactMethods as method, index (method.id)}
 						{@const methodLinkAttributes = {
 							href:
 								method.external || isExternalOrProtocol(method.href)
@@ -54,8 +89,11 @@
 						<li>
 							<a
 								{...methodLinkAttributes}
+								class:contact-row-item={true}
+								class:contact-row-item--visible={methodsRevealed}
 								class="contact-row"
 								aria-label={`${method.label}: ${method.value}${method.external ? ' (opens in a new tab)' : ''}`}
+								style={`--contact-row-delay: ${index * 70}ms;`}
 							>
 								<span class="contact-row__icon" aria-hidden="true">
 									<Icon name={method.icon} size="md" />
@@ -72,7 +110,12 @@
 			</section>
 
 			<section
+				use:inview={{ threshold: 0.18, unobserveOnEnter: true }}
+				oninview_change={revealSocials}
+				class:contact-reveal={true}
+				class:contact-reveal--visible={socialsRevealed}
 				class="surface-card-light rounded-[var(--radius-xl)] p-5 shadow-[var(--shadow-card)] sm:p-6"
+				style="--contact-reveal-delay: 140ms;"
 			>
 				<div class="space-y-1">
 					<h3 class="text-lg font-semibold text-[var(--text-on-light)] sm:text-xl">
@@ -84,7 +127,7 @@
 				</div>
 
 				<ul class="mt-5 space-y-3">
-					{#each socialLinks as link (link.id)}
+					{#each socialLinks as link, index (link.id)}
 						{@const socialLinkAttributes = {
 							href:
 								link.external || isExternalOrProtocol(link.href)
@@ -96,8 +139,11 @@
 						<li>
 							<a
 								{...socialLinkAttributes}
+								class:contact-row-item={true}
+								class:contact-row-item--visible={socialsRevealed}
 								class="contact-row"
 								aria-label={`${link.label}${link.external ? ' (opens in a new tab)' : ''}`}
+								style={`--contact-row-delay: ${index * 70}ms;`}
 							>
 								<span class="contact-row__icon" aria-hidden="true">
 									<Icon name={link.icon} size="md" />
@@ -122,6 +168,20 @@
 		color: rgba(16, 22, 18, 0.78);
 	}
 
+	.contact-reveal {
+		opacity: 0;
+		transform: translate3d(0, 20px, 0);
+		transition:
+			opacity 320ms var(--ease-standard),
+			transform 380ms var(--ease-standard);
+		transition-delay: var(--contact-reveal-delay, 0ms);
+	}
+
+	.contact-reveal--visible {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+
 	.contact-row {
 		display: flex;
 		align-items: center;
@@ -139,6 +199,23 @@
 			border-color var(--duration-fast) var(--ease-standard),
 			box-shadow var(--duration-fast) var(--ease-standard),
 			background-color var(--duration-fast) var(--ease-standard);
+	}
+
+	.contact-row-item {
+		opacity: 0;
+		transform: translate3d(0, 16px, 0);
+		transition:
+			opacity 260ms var(--ease-standard),
+			transform 320ms var(--ease-standard),
+			border-color var(--duration-fast) var(--ease-standard),
+			box-shadow var(--duration-fast) var(--ease-standard),
+			background-color var(--duration-fast) var(--ease-standard);
+		transition-delay: var(--contact-row-delay, 0ms);
+	}
+
+	.contact-row-item--visible {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
 	}
 
 	.contact-row__icon {
@@ -186,8 +263,16 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		.contact-reveal,
+		.contact-row-item,
 		.contact-row {
 			transition: none;
+		}
+
+		.contact-reveal,
+		.contact-row-item {
+			opacity: 1;
+			transform: none;
 		}
 	}
 </style>

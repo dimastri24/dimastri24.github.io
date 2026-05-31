@@ -112,13 +112,13 @@
 
 ## Milestone 8: Contact
 
-- [ ] Render contact methods from typed data.
+- [x] Render contact methods from typed data.
       Acceptance: GitHub, LinkedIn, Instagram, email, and CV action appear from a centralized data source.
 
-- [ ] Add external-link semantics and states.
+- [x] Add external-link semantics and states.
       Acceptance: outbound links are clear, keyboard accessible, and visually interactive.
 
-- [ ] Style contact rows using shared patterns.
+- [x] Style contact rows using shared patterns.
       Acceptance: contact rows feel consistent with the global UI system.
 
 ## Milestone 9: Error Handling And SEO
