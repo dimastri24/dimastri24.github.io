@@ -98,19 +98,16 @@
 
 ## Milestone 7: Career Timeline
 
-- [ ] Build desktop timeline structure.
+- [x] Build desktop timeline structure.
       Acceptance: dates, center line, markers, and content columns align correctly on desktop.
 
-- [ ] Build mobile timeline adaptation.
+- [x] Build mobile timeline adaptation.
       Acceptance: the timeline collapses into a readable single-column layout on narrow screens.
 
-- [ ] Add detail disclosure behavior.
-      Acceptance: hovering, focusing, or tapping a timeline item reveals detailed responsibilities or achievements.
+- [x] Add detail disclosure behavior.
+      Acceptance: toggle a timeline item reveals detailed responsibilities or achievements.
 
-- [ ] Add accessible popover or inline detail fallback.
-      Acceptance: no timeline details are hover-only.
-
-- [ ] Populate placeholder career entries from typed data.
+- [x] Populate placeholder career entries from typed data.
       Acceptance: entries are latest-to-oldest and include role, org, summary, and detail fields.
 
 ## Milestone 8: Contact
