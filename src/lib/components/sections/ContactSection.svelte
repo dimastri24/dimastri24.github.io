@@ -5,7 +5,6 @@
 	import Icon from '$lib/components/ui/Icon.svelte';
 	import { contactMethods, socialLinks } from '$lib/data';
 
-	// Fungsi pembantu untuk memvalidasi apakah tautan adalah eksternal/non-internal
 	const isExternalOrProtocol = (url: string) => {
 		return (
 			url.startsWith('mailto:') ||
@@ -21,11 +20,11 @@
 		<div class="max-w-2xl space-y-4 sm:space-y-5">
 			<p class="text-code text-xs tracking-[0.22em] text-[var(--accent)] uppercase">Contact</p>
 			<h2 class="text-display text-3xl font-semibold sm:text-4xl">
-				Direct channels, no contact form.
+				Let&apos;s keep the conversation direct.
 			</h2>
 			<p class="contact-copy text-base leading-8 sm:text-lg">
-				Reach out through the links below for collaboration, product work, or a quick technical
-				conversation. Everything here is intentional and kept one tap away.
+				For product collaboration, engineering roles, or a focused technical discussion, use the
+				channel that fits best. No forms, no routing maze, just clear ways to reach me.
 			</p>
 		</div>
 
@@ -45,17 +44,18 @@
 				<ul class="mt-5 space-y-3">
 					{#each contactMethods as method (method.id)}
 						{@const methodLinkAttributes = {
-							// Ditambahkan pengecekan fungsi isExternalOrProtocol
 							href:
 								method.external || isExternalOrProtocol(method.href)
 									? method.href
-									: resolve(method.href as RouteId)
+									: resolve(method.href as RouteId),
+							target: method.external ? '_blank' : undefined,
+							rel: method.external ? 'noreferrer' : undefined
 						}}
 						<li>
 							<a
 								{...methodLinkAttributes}
 								class="contact-row"
-								aria-label={`${method.label}: ${method.value}`}
+								aria-label={`${method.label}: ${method.value}${method.external ? ' (opens in a new tab)' : ''}`}
 							>
 								<span class="contact-row__icon" aria-hidden="true">
 									<Icon name={method.icon} size="md" />
@@ -86,12 +86,19 @@
 				<ul class="mt-5 space-y-3">
 					{#each socialLinks as link (link.id)}
 						{@const socialLinkAttributes = {
-							// Ditambahkan pengecekan fungsi isExternalOrProtocol
 							href:
-								link.external || isExternalOrProtocol(link.href) ? link.href : resolve(link.href as RouteId)
+								link.external || isExternalOrProtocol(link.href)
+									? link.href
+									: resolve(link.href as RouteId),
+							target: link.external ? '_blank' : undefined,
+							rel: link.external ? 'noreferrer' : undefined
 						}}
 						<li>
-							<a {...socialLinkAttributes} class="contact-row" aria-label={link.label}>
+							<a
+								{...socialLinkAttributes}
+								class="contact-row"
+								aria-label={`${link.label}${link.external ? ' (opens in a new tab)' : ''}`}
+							>
 								<span class="contact-row__icon" aria-hidden="true">
 									<Icon name={link.icon} size="md" />
 								</span>
