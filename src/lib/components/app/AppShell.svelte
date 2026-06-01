@@ -24,7 +24,7 @@
 	class:lg={showSidebar}
 	data-shell-sidebar={showSidebar ? 'enabled' : 'disabled'}
 >
-	<div class="pointer-events-none absolute inset-0">
+	<div class="pointer-events-none absolute inset-0 overflow-hidden">
 		<div
 			class="absolute top-[-8rem] left-[-12rem] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,_rgba(198,162,106,0.18)_0%,_rgba(198,162,106,0)_70%)] blur-3xl"
 		></div>
