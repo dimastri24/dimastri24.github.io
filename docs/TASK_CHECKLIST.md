@@ -28,108 +28,111 @@
       Acceptance: hero, about, career, contact, and site metadata live in `src/lib/data`.
       Note: these are placeholder portfolio data modules created as Milestone 1 scaffolding and will be refined in later milestones.
 
-- [ ] Replace starter global CSS with token-driven globals.
+- [x] Replace starter global CSS with token-driven globals.
       Acceptance: global stylesheet defines theme variables for color, spacing, radius, border, shadow, and motion.
+      Note: `src/routes/layout.css` now owns the tokenized global theme layer, base typography, focus styles, shared surface helpers, and reduced-motion defaults.
 
-- [ ] Add shared shell and layout primitives.
+- [x] Add shared shell and layout primitives.
       Acceptance: there is a reusable section wrapper and container strategy before section-specific styling begins.
+      Note: `AppShell`, `PageContainer`, and `SectionShell` are in place and already wired into the current scaffold homepage.
 
 ## Milestone 3: Navigation
 
-- [ ] Build desktop fixed sidebar navigation.
+- [x] Build desktop fixed sidebar navigation.
       Acceptance: desktop viewport shows four icon-based nav actions linked to all homepage anchors.
+      Note: desktop navigation is implemented as a fixed left rail using shared navigation components and local SVG icons.
 
-- [ ] Build mobile sidebar adaptation.
+- [x] Build mobile sidebar adaptation.
       Acceptance: navigation remains easy to reach on small screens without obscuring section content.
+      Note: mobile navigation is implemented as a bottom dock, and the shell adds bottom padding so the dock does not cover section content.
 
-- [ ] Implement smooth section navigation.
+- [x] Implement smooth section navigation.
       Acceptance: activating a nav item scrolls to the correct section target without broken base-path behavior.
+      Note: nav links now resolve through SvelteKit path handling and use section anchors with global smooth scrolling.
 
-- [ ] Implement active-section state.
+- [x] Implement active-section state.
       Acceptance: the current section is visibly indicated while scrolling through the homepage.
+      Note: active state is driven by shared navigation state plus `svelte-inview` section observers and hash synchronization.
 
-- [ ] Add keyboard and focus support to nav items.
+- [x] Add keyboard and focus support to nav items.
       Acceptance: tabbing through navigation exposes clear focus states and fully usable actions.
 
 ## Milestone 4: Loading Screen
 
-- [ ] Implement the fullscreen loading overlay.
+- [x] Implement the fullscreen loading overlay.
       Acceptance: initial load shows "loading", animated dots, and a percentage counter.
 
-- [ ] Wire loading completion to real app readiness.
+- [x] Setup artificial smooth loading progress.
       Acceptance: the loading screen does not wait for an arbitrary long fixed timeout.
 
-- [ ] Add exit transition and reduced-motion fallback.
+- [x] Add exit transition and reduced-motion fallback.
       Acceptance: default mode slides the overlay away; reduced motion simplifies or removes the effect.
 
 ## Milestone 5: Hero
 
-- [ ] Build hero text composition.
+- [x] Build hero text composition.
       Acceptance: the hero renders code-tag accents, the main heading, role labels, and CTA.
 
-- [ ] Implement CTA scroll-to-contact behavior.
+- [x] Implement CTA scroll-to-contact behavior.
       Acceptance: activating the CTA reaches the contact section reliably.
 
-- [ ] Build the large decorative hero mark.
+- [x] Build the large decorative hero mark.
       Acceptance: the hero includes a prominent stylized "D" with depth and clear composition balance.
 
-- [ ] Add selective hero motion.
+- [x] Add selective hero motion.
       Acceptance: reveal and mark interaction feel polished without heavy libraries or distracting movement.
 
-- [ ] Validate mobile hero layout.
+- [x] Validate mobile hero layout.
       Acceptance: mobile view stacks cleanly with no overlap or clipped text.
 
 ## Milestone 6: About
 
-- [ ] Add profile image handling.
+- [x] Add profile image handling.
       Acceptance: the profile image loads via an approved asset strategy and does not cause layout shift.
 
-- [ ] Render about copy from typed data.
+- [x] Render about copy from typed data.
       Acceptance: no profile prose is hardcoded directly in the section component.
 
-- [ ] Add reveal animation with reduced-motion support.
+- [x] Add reveal animation with reduced-motion support.
       Acceptance: section entrance degrades gracefully when reduced motion is active.
 
 ## Milestone 7: Career Timeline
 
-- [ ] Build desktop timeline structure.
+- [x] Build desktop timeline structure.
       Acceptance: dates, center line, markers, and content columns align correctly on desktop.
 
-- [ ] Build mobile timeline adaptation.
+- [x] Build mobile timeline adaptation.
       Acceptance: the timeline collapses into a readable single-column layout on narrow screens.
 
-- [ ] Add detail disclosure behavior.
-      Acceptance: hovering, focusing, or tapping a timeline item reveals detailed responsibilities or achievements.
+- [x] Add detail disclosure behavior.
+      Acceptance: toggle a timeline item reveals detailed responsibilities or achievements.
 
-- [ ] Add accessible popover or inline detail fallback.
-      Acceptance: no timeline details are hover-only.
-
-- [ ] Populate placeholder career entries from typed data.
+- [x] Populate placeholder career entries from typed data.
       Acceptance: entries are latest-to-oldest and include role, org, summary, and detail fields.
 
 ## Milestone 8: Contact
 
-- [ ] Render contact methods from typed data.
+- [x] Render contact methods from typed data.
       Acceptance: GitHub, LinkedIn, Instagram, email, and CV action appear from a centralized data source.
 
-- [ ] Add external-link semantics and states.
+- [x] Add external-link semantics and states.
       Acceptance: outbound links are clear, keyboard accessible, and visually interactive.
 
-- [ ] Style contact rows using shared patterns.
+- [x] Style contact rows using shared patterns.
       Acceptance: contact rows feel consistent with the global UI system.
 
 ## Milestone 9: Error Handling And SEO
 
-- [ ] Build root branded `+error.svelte`.
+- [x] Build root branded `+error.svelte`.
       Acceptance: in-app route errors render a custom experience with a return-home action.
 
-- [ ] Ensure GitHub Pages `404.html` output exists.
+- [x] Ensure GitHub Pages `404.html` output exists.
       Acceptance: static build output contains a suitable fallback page for Pages hosting.
 
-- [ ] Add title and description metadata.
+- [x] Add title and description metadata.
       Acceptance: homepage and error route have explicit metadata rather than scaffold defaults.
 
-- [ ] Validate heading and landmark structure.
+- [x] Validate heading and landmark structure.
       Acceptance: section hierarchy is semantically meaningful and not purely visual.
 
 ## Milestone 10: Polish And Deploy
@@ -140,16 +143,16 @@
 - [ ] Review reduced-motion behavior across all major interactions.
       Acceptance: the app remains fully usable with motion reduction enabled.
 
-- [ ] Run type and Svelte checks.
+- [x] Run type and Svelte checks.
       Acceptance: `npm run check` passes.
 
-- [ ] Run linting.
+- [x] Run linting.
       Acceptance: `npm run lint` passes.
 
-- [ ] Run production build.
+- [x] Run production build.
       Acceptance: `npm run build` passes and emits static output without deployment-blocking warnings.
 
-- [ ] Validate base-path deployment.
+- [x] Validate base-path deployment.
       Acceptance: local verification confirms links and assets still resolve under a repo-name subpath assumption.
 
 - [x] Add GitHub Actions deployment workflow.

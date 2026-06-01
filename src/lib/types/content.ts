@@ -1,3 +1,5 @@
+import type { IconName } from './ui';
+
 export type SectionId = 'home' | 'about' | 'career' | 'contact';
 
 export interface HeroBadge {
@@ -43,7 +45,7 @@ export interface ContactMethod {
 	label: string;
 	value: string;
 	href: string;
-	icon: string;
+	icon: IconName;
 	external: boolean;
 }
 
@@ -51,7 +53,7 @@ export interface SocialLink {
 	id: string;
 	label: string;
 	href: string;
-	icon: string;
+	icon: IconName;
 	external: boolean;
 }
 

@@ -3,23 +3,19 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Portfolio unavailable</title>
+		<title>Page unavailable | Dimas</title>
 		<style>
 			:root {
 				color-scheme: dark;
 				--bg: #15291e;
-				--panel: rgba(255, 251, 221, 0.08);
+				--panel: rgba(255, 255, 255, 0.04);
 				--line: rgba(255, 251, 221, 0.14);
 				--text: #fffbdd;
 				--muted: rgba(255, 251, 221, 0.72);
 				--accent: #c6a26a;
-				font-family:
-					'Segoe UI',
-					ui-sans-serif,
-					system-ui,
-					-apple-system,
-					BlinkMacSystemFont,
-					sans-serif;
+				--accent-strong: #c6a26a;
+				--focus-ring: rgba(176, 141, 87, 0.45);
+				font-family: 'Aptos', 'Segoe UI', 'SF Pro Text', 'Helvetica Neue', 'Arial Nova', sans-serif;
 			}
 
 			* {
@@ -33,7 +29,7 @@
 				place-items: center;
 				padding: 2rem;
 				background:
-					radial-gradient(circle at top, rgba(198, 162, 106, 0.18), transparent 30%),
+					radial-gradient(circle at top, rgba(198, 162, 106, 0.16), transparent 24rem),
 					linear-gradient(180deg, #1b3326 0%, #15291e 100%);
 				color: var(--text);
 			}
@@ -41,9 +37,9 @@
 			main {
 				width: min(100%, 42rem);
 				border: 1px solid var(--line);
-				border-radius: 1.5rem;
+				border-radius: 1.75rem;
 				background: var(--panel);
-				padding: clamp(2rem, 5vw, 3rem);
+				padding: clamp(2rem, 5vw, 3.25rem);
 				box-shadow: 0 24px 60px rgba(6, 10, 8, 0.28);
 			}
 
@@ -55,16 +51,18 @@
 
 			.status {
 				margin-bottom: 1rem;
-				color: var(--accent);
-				font-size: 0.875rem;
+				color: var(--accent-strong);
+				font-family: 'Cascadia Code', 'Fira Code', 'SFMono-Regular', 'Consolas', monospace;
+				font-size: 0.78rem;
 				font-weight: 700;
-				letter-spacing: 0.12em;
+				letter-spacing: 0.2em;
 				text-transform: uppercase;
 			}
 
 			h1 {
 				margin: 0 0 1rem;
-				font-size: clamp(2rem, 7vw, 3.5rem);
+				font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'Georgia', serif;
+				font-size: clamp(2.25rem, 7vw, 4rem);
 				line-height: 0.95;
 			}
 
@@ -81,10 +79,23 @@
 				justify-content: center;
 				border: 1px solid rgba(198, 162, 106, 0.3);
 				border-radius: 999px;
-				padding: 0.875rem 1.25rem;
+				padding: 0.9rem 1.3rem;
 				color: var(--text);
 				text-decoration: none;
-				font-weight: 600;
+				font-family: 'Cascadia Code', 'Fira Code', 'SFMono-Regular', 'Consolas', monospace;
+				font-size: 0.74rem;
+				font-weight: 700;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				transition:
+					transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+					border-color 160ms cubic-bezier(0.22, 1, 0.36, 1),
+					background-color 160ms cubic-bezier(0.22, 1, 0.36, 1);
+			}
+
+			.actions a:last-child {
+				border-color: var(--line);
+				color: var(--muted);
 			}
 
 			a:hover,
@@ -92,16 +103,20 @@
 				border-color: var(--accent);
 				outline: none;
 				background: rgba(198, 162, 106, 0.1);
+				transform: translateY(-1px);
+				color: var(--text);
+				box-shadow: 0 0 0 3px var(--focus-ring);
 			}
 		</style>
 	</head>
 	<body>
 		<main>
 			<div class="status">Status %sveltekit.status%</div>
-			<h1>The portfolio is temporarily unavailable.</h1>
+			<h1>%sveltekit.status% page unavailable.</h1>
 			<p>%sveltekit.error.message%</p>
 			<div class="actions">
 				<a href="./">Return home</a>
+				<a href="./#contact">Open contact</a>
 			</div>
 		</main>
 	</body>

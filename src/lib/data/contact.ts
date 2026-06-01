@@ -4,8 +4,8 @@ export const contactMethods: ContactMethod[] = [
 	{
 		id: 'email',
 		label: 'Email',
-		value: 'dimas@example.com',
-		href: 'mailto:dimas@example.com',
+		value: 'dimastriraharjo24@gmail.com',
+		href: 'mailto:dimastriraharjo24@gmail.com',
 		icon: 'mail',
 		external: false
 	},
@@ -23,21 +23,21 @@ export const socialLinks: SocialLink[] = [
 	{
 		id: 'github',
 		label: 'GitHub',
-		href: 'https://github.com/dimas',
+		href: 'https://github.com/dimastri24',
 		icon: 'github',
 		external: true
 	},
 	{
 		id: 'linkedin',
 		label: 'LinkedIn',
-		href: 'https://linkedin.com/in/dimas',
+		href: 'https://www.linkedin.com/in/dimas-tri-raharjo-a6613a220/',
 		icon: 'linkedin',
 		external: true
 	},
 	{
 		id: 'instagram',
 		label: 'Instagram',
-		href: 'https://instagram.com/dimas',
+		href: 'https://www.instagram.com/raharjodimastri',
 		icon: 'instagram',
 		external: true
 	}
