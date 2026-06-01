@@ -1,22 +1,22 @@
 <script lang="ts">
-    import { resolve } from '$app/paths';
-    import { page } from '$app/state'; 
-    import { siteMetadata } from '$lib/data';
-    import './layout.css';
+	import { resolve } from '$app/paths';
+	import { page } from '$app/state';
+	import { siteMetadata } from '$lib/data';
+	import './layout.css';
 
-    let status = $derived(page.status); 
-    let error = $derived(page.error);
+	let status = $derived(page.status);
+	let error = $derived(page.error);
 
-    let statusLabel = $derived(status === 404 ? 'Page not found' : 'Unexpected interruption');
-    let title = $derived(`${statusLabel} | ${siteMetadata.name}`);
-    
-    let message = $derived(
-        error?.message ||
-            (status === 404
-                ? 'The page you requested does not exist or has moved.'
-                : 'Something went wrong while rendering this page.')
-    );
-    let pathname = $derived(page.url.pathname);
+	let statusLabel = $derived(status === 404 ? 'Page not found' : 'Unexpected interruption');
+	let title = $derived(`${statusLabel} | ${siteMetadata.name}`);
+
+	let message = $derived(
+		error?.message ||
+			(status === 404
+				? 'The page you requested does not exist or has moved.'
+				: 'Something went wrong while rendering this page.')
+	);
+	let pathname = $derived(page.url.pathname);
 </script>
 
 <svelte:head>
@@ -60,10 +60,12 @@
 				<div
 					class="rounded-[var(--radius-lg)] border border-[var(--color-line-dark)] bg-[rgba(255,255,255,0.03)] px-4 py-4"
 				>
-					<p class="text-code text-[0.7rem] tracking-[0.18em] text-[var(--text-muted-dark)] uppercase">
+					<p
+						class="text-code text-[0.7rem] tracking-[0.18em] text-[var(--text-muted-dark)] uppercase"
+					>
 						Request path
 					</p>
-					<p class="mt-2 break-all text-sm leading-7 text-[var(--text-on-dark)] sm:text-base">
+					<p class="mt-2 text-sm leading-7 break-all text-[var(--text-on-dark)] sm:text-base">
 						{pathname}
 					</p>
 				</div>

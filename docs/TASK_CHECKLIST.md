@@ -123,16 +123,16 @@
 
 ## Milestone 9: Error Handling And SEO
 
-- [ ] Build root branded `+error.svelte`.
+- [x] Build root branded `+error.svelte`.
       Acceptance: in-app route errors render a custom experience with a return-home action.
 
-- [ ] Ensure GitHub Pages `404.html` output exists.
+- [x] Ensure GitHub Pages `404.html` output exists.
       Acceptance: static build output contains a suitable fallback page for Pages hosting.
 
-- [ ] Add title and description metadata.
+- [x] Add title and description metadata.
       Acceptance: homepage and error route have explicit metadata rather than scaffold defaults.
 
-- [ ] Validate heading and landmark structure.
+- [x] Validate heading and landmark structure.
       Acceptance: section hierarchy is semantically meaningful and not purely visual.
 
 ## Milestone 10: Polish And Deploy
@@ -143,16 +143,16 @@
 - [ ] Review reduced-motion behavior across all major interactions.
       Acceptance: the app remains fully usable with motion reduction enabled.
 
-- [ ] Run type and Svelte checks.
+- [x] Run type and Svelte checks.
       Acceptance: `npm run check` passes.
 
-- [ ] Run linting.
+- [x] Run linting.
       Acceptance: `npm run lint` passes.
 
-- [ ] Run production build.
+- [x] Run production build.
       Acceptance: `npm run build` passes and emits static output without deployment-blocking warnings.
 
-- [ ] Validate base-path deployment.
+- [x] Validate base-path deployment.
       Acceptance: local verification confirms links and assets still resolve under a repo-name subpath assumption.
 
 - [x] Add GitHub Actions deployment workflow.
