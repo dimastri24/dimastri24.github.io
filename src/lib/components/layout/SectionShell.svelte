@@ -18,7 +18,7 @@
 <section
 	{id}
 	aria-label={label}
-	class={`relative scroll-mt-24 py-16 sm:py-20 lg:py-24 ${
+	class={`relative scroll-mt-0 py-16 sm:py-20 lg:py-24 ${
 		variant === 'dark'
 			? 'bg-[var(--bg-section-dark)] text-[var(--text-on-dark)]'
 			: 'bg-[var(--bg-section-light)] text-[var(--text-on-light)]'
