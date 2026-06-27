@@ -1,27 +1,60 @@
-# docs/AGENT_GUIDELINES.md
+# CLAUDE.md - Single Source of Truth for Claude Code
 
-## 1. Environment & MCP Tools
+## Project Overview
 
-- **Stack**: SvelteKit 5 (Runes), TypeScript, npm, TailwindCSS, Prettier, ESLint, MDsvex, GitHub Pages.
-- **Svelte MCP Server Tools** (Mandatory Workflow):
+This is a SvelteKit 5 (Runes) static portfolio website for Dimas, a software engineer with 2+ years of experience. The site is fully compatible with GitHub Pages and uses static HTML generation.
 
-1. `list-sections`: Run FIRST on any Svelte/SvelteKit query to discover docs.
-2. `get-documentation`: Run IMMEDIATELY after to fetch all relevant section contents.
-3. `svelte-autofixer`: Run ALWAYS before presenting or saving Svelte code. Repeat until 0 errors.
-4. `playground-link`: Ask user permission FIRST. Never use if writing directly to project files.
+## Core Goals
 
----
+- Build a clean, professional portfolio with forest/earthy aesthetic
+- Implement mobile-first responsive design
+- Ensure 100% static prerenderable output
+- Follow strict accessibility and performance guidelines
 
-## 2. Code Architecture & Ownership
+## Technology Stack
+
+- **Core Framework**: SvelteKit 5 & Svelte 5 (Strict Runes Mode)
+- **Language**: TypeScript (Strict mode, no `any`)
+- **Styling**: Tailwind CSS 4 + CSS Custom Properties
+- **Animation**: `svelte-inview` (viewport detection), `svelte-motion` (micro-interactions)
+- **Tooling**: ESLint, Prettier
+- **Deployment**: GitHub Pages with static adapter
+
+## Folder Structure & Conventions
+
+```
+src/
+  app.html, error.html (Hard fallback, no JS dependency)
+  lib/
+    assets/ (Profile, icons, social - imported for asset hashing)
+    components/ (app, layout, navigation, sections, timeline, contact, motion, ui)
+    data/ (site.ts, hero.ts, about.ts, career.ts, contact.ts - SINGLE source of truth)
+    types/ (content.ts, ui.ts, motion.ts)
+    utils/ (classnames.ts, motion.ts, scroll.ts, paths.ts)
+  routes/
+    +layout.ts (Owns page options: prerender = true, trailingSlash policy)
+    +layout.svelte (Global layout shell & initialization)
+    +page.svelte (Homepage implementation & section composition)
+    +error.svelte (Branded 404/error page with clear return-home action)
+    layout.css (Global styles & theme custom properties)
+```
+
+## Code Architecture & Ownership
 
 - **`src/lib/data`**: Owns all typed portfolio content. No hardcoded facts in components.
 - **`src/lib/types`**: Owns public interfaces/unions. No `any`. Separate content types from UI helpers. Narrow unions for IDs/variants.
 - **`src/lib/components`**: Owns rendering and localized behavior. Thin, reusable primitives. Do not extract shared components for single-use unless isolating complex motion/a11y.
 - **`src/routes`**: Owns route composition and page options only. Keep generic UI free of route concerns.
 
----
+## Environment & MCP Tools
 
-## 3. Development Rules
+**Mandatory Workflow for Svelte/SvelteKit queries:**
+1. `list-sections`: Run FIRST on any Svelte/SvelteKit query to discover docs.
+2. `get-documentation`: Run IMMEDIATELY after to fetch all relevant section contents.
+3. `svelte-autofixer`: Run ALWAYS before presenting or saving Svelte code. Repeat until 0 errors.
+4. `playground-link`: Ask user permission FIRST. Never use if writing directly to project files.
+
+## Development Rules
 
 ### Svelte & TS Conventions
 
@@ -55,9 +88,7 @@
 - Account for GitHub Pages base path behavior in assets and navigation.
 - Provide a root branded `+error.svelte` and a static `error.html` fallback.
 
----
-
-## 4. Definition of Done (Verification)
+## Definition of Done (Verification)
 
 Before considering implementation complete, the agent MUST execute and pass these commands:
 
