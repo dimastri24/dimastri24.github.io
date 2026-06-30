@@ -49,6 +49,7 @@ src/
 ## Environment & MCP Tools
 
 **Mandatory Workflow for Svelte/SvelteKit queries:**
+
 1. `list-sections`: Run FIRST on any Svelte/SvelteKit query to discover docs.
 2. `get-documentation`: Run IMMEDIATELY after to fetch all relevant section contents.
 3. `svelte-autofixer`: Run ALWAYS before presenting or saving Svelte code. Repeat until 0 errors.

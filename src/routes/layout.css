@@ -67,15 +67,13 @@
 
 html {
 	scroll-behavior: smooth;
-	background: var(--bg-page);
+	background: transparent;
 }
 
 body {
 	margin: 0;
 	min-width: 320px;
-	background:
-		radial-gradient(circle at top, var(--bg-page-glow), transparent 24rem),
-		linear-gradient(180deg, var(--color-forest-900) 0%, var(--bg-page) 100%);
+	background: transparent;
 	color: var(--text-on-dark);
 	font-family: var(--font-sans);
 	text-rendering: optimizeLegibility;

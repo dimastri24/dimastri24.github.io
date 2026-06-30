@@ -16,6 +16,6 @@
 	let { size = 'content', children }: Props = $props();
 </script>
 
-<div class={`mx-auto w-full px-5 sm:px-8 lg:px-10 ${widths[size]}`}>
+<div class={`mx-auto w-full px-5 sm:px-8 lg:pr-10 lg:pl-24 ${widths[size]}`}>
 	{@render children()}
 </div>

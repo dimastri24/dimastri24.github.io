@@ -10,6 +10,7 @@ overly luxurious, stiff, or cluttered with unnecessary deco
 Design Traits
 
 Primary Qualities:
+
 - Minimal
 - Professional
 - Calm
@@ -18,6 +19,7 @@ Primary Qualities:
 - Timeless
 
 Explicitly Avoid:
+
 - Overly "elegant" or luxury-focused aesthetics (no gold gradients, glassmorphism, or excessive shadows)
 - Decorative animations or motion that doesn't serve clear
 - Cluttered navigation with multiple nested layers
