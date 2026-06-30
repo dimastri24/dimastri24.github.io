@@ -7,9 +7,10 @@
 	interface Props {
 		id: SectionId;
 		threshold?: number | number[];
+		children?: import('svelte').Snippet;
 	}
 
-	let { id, threshold = 0 }: Props = $props();
+	let { id, threshold = 0, children }: Props = $props();
 
 	function handleEnter(event: CustomEvent<ObserverEventDetails>) {
 		if (event.detail.inView && !navigationState.isManualScrolling) {
@@ -19,8 +20,13 @@
 </script>
 
 <div
-	use:inview={{ rootMargin: '0px', threshold }}
+	use:inview={{
+		rootMargin: '-20% 0px -60% 0px',
+		threshold: threshold,
+		unobserveOnEnter: false
+	}}
 	oninview_enter={handleEnter}
-	aria-hidden="true"
-	class="pointer-events-none absolute inset-x-0 top-[45vh] h-px"
-></div>
+	class="relative w-full"
+>
+	{@render children?.()}
+</div>

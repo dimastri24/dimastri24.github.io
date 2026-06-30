@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="relative min-h-screen overflow-x-clip"
+	class="relative min-h-screen overflow-x-clip bg-[var(--bg-section-dark)]"
 	class:lg={showSidebar}
 	data-shell-sidebar={showSidebar ? 'enabled' : 'disabled'}
 >
@@ -50,7 +50,7 @@
 		{/if}
 	</div>
 
-	<div class="relative z-10 min-h-screen pb-28 lg:pb-0 lg:pl-[7.5rem]">
+	<div class="relative z-10 min-h-screen pb-28 lg:pb-0">
 		{@render children()}
 	</div>
 </div>
