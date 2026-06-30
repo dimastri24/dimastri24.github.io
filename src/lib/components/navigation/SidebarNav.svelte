@@ -20,15 +20,31 @@
 			: 'fixed top-1/2 left-4 z-40 hidden -translate-y-1/2 lg:block'
 	]}
 >
-	<ul class={isMobile ? 'grid grid-cols-4 gap-2' : 'flex flex-col gap-2'}>
-		{#each items as item (item.id)}
-			<li>
-				<SidebarNavItem
-					{item}
-					active={activeSection === item.id}
-					onSelect={() => scrollToSection(item.id)}
-				/>
-			</li>
-		{/each}
-	</ul>
+	{#if isMobile}
+		<div class="surface-card-dark rounded-[calc(var(--radius-xl)+0.25rem)] p-2 backdrop-blur">
+			<ul class="grid grid-cols-4 gap-2 pb-[env(safe-area-inset-bottom)]">
+				{#each items as item (item.id)}
+					<li>
+						<SidebarNavItem
+							{item}
+							active={activeSection === item.id}
+							onSelect={() => scrollToSection(item.id)}
+						/>
+					</li>
+				{/each}
+			</ul>
+		</div>
+	{:else}
+		<ul class="flex flex-col gap-2">
+			{#each items as item (item.id)}
+				<li>
+					<SidebarNavItem
+						{item}
+						active={activeSection === item.id}
+						onSelect={() => scrollToSection(item.id)}
+					/>
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </nav>
